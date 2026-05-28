@@ -9,7 +9,10 @@ namespace DotNet06DbBooksApp
     public class DatabaseHelper
     {
         // MySQL 연결문자열
-        private string connStr = "Server=localhost;Database=bookrentalshop;User ID=root;Password=my123456;Charset=utf8mb4;";
+        private string connStr = "Server=localhost;Database=bookrentalshop;" +
+                                 "User ID=root;Password=my123456;" +
+                                 "Charset=utf8mb4;";
+
 
         /// <summary>
         /// SELECT 쿼리 실행 메서드
@@ -22,14 +25,14 @@ namespace DotNet06DbBooksApp
         {
             // 1, DbConnection 객체 생성 : Db연결문자열 사용
             using MySqlConnection conn = new MySqlConnection(connStr);
-            conn.Open();    // DB 오픈
+            conn.Open();  // DB 오픈
 
             // 2, SqlCommand 객체 생성 : 쿼리를 실행할수 있는 준비
             using MySqlCommand cmd = new MySqlCommand(sql, conn);
-            // 3, SqlDataAdapter 생성 : 매우 간단하게 데이터를 가져올수 있는 방법
-            // 또는 SqlDataReader 생성 : 직접 데이터를 핸들링 
+            // 3, SqlDataAdapter 생성 : 매우 간단하게 데이터가져올수 있는 방법
+            // 또는, SqlDataReader 생성 : 직접 데이터를 핸들링
             using MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
+                        
             // 4, 공통 DataTable 객체 : 어댑터 객체내 데이터를 복사
             DataTable dt = new DataTable();
             adapter.Fill(dt);

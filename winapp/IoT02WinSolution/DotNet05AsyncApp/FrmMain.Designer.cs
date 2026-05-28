@@ -56,23 +56,23 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(541, 192);
+            groupBox1.Size = new Size(473, 189);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "비동기 처리";
             // 
             // PrgProcess
             // 
-            PrgProcess.Location = new Point(82, 159);
+            PrgProcess.Location = new Point(28, 138);
             PrgProcess.Name = "PrgProcess";
-            PrgProcess.Size = new Size(387, 23);
+            PrgProcess.Size = new Size(418, 29);
             PrgProcess.TabIndex = 9;
             // 
             // BtnAsyncCopy
             // 
-            BtnAsyncCopy.Location = new Point(342, 130);
+            BtnAsyncCopy.Location = new Point(240, 103);
             BtnAsyncCopy.Name = "BtnAsyncCopy";
-            BtnAsyncCopy.Size = new Size(97, 23);
+            BtnAsyncCopy.Size = new Size(130, 29);
             BtnAsyncCopy.TabIndex = 7;
             BtnAsyncCopy.Text = "비동기화 복사";
             BtnAsyncCopy.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             // BtnSyncCopy
             // 
-            BtnSyncCopy.Location = new Point(126, 130);
+            BtnSyncCopy.Location = new Point(104, 103);
             BtnSyncCopy.Name = "BtnSyncCopy";
-            BtnSyncCopy.Size = new Size(97, 23);
+            BtnSyncCopy.Size = new Size(130, 29);
             BtnSyncCopy.TabIndex = 6;
             BtnSyncCopy.Text = "동기화 복사";
             BtnSyncCopy.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // BtnTarget
             // 
-            BtnTarget.Location = new Point(485, 91);
+            BtnTarget.Location = new Point(406, 68);
             BtnTarget.Name = "BtnTarget";
-            BtnTarget.Size = new Size(32, 23);
+            BtnTarget.Size = new Size(40, 27);
             BtnTarget.TabIndex = 5;
             BtnTarget.Text = "...";
             BtnTarget.UseVisualStyleBackColor = true;
@@ -100,9 +100,9 @@
             // 
             // BtnSource
             // 
-            BtnSource.Location = new Point(485, 37);
+            BtnSource.Location = new Point(406, 32);
             BtnSource.Name = "BtnSource";
-            BtnSource.Size = new Size(32, 23);
+            BtnSource.Size = new Size(40, 27);
             BtnSource.TabIndex = 4;
             BtnSource.Text = "...";
             BtnSource.UseVisualStyleBackColor = true;
@@ -110,44 +110,45 @@
             // 
             // TxtTarget
             // 
-            TxtTarget.Location = new Point(82, 92);
+            TxtTarget.Location = new Point(84, 68);
             TxtTarget.Name = "TxtTarget";
             TxtTarget.ReadOnly = true;
-            TxtTarget.Size = new Size(387, 23);
+            TxtTarget.Size = new Size(316, 27);
             TxtTarget.TabIndex = 3;
             // 
             // TxtSource
             // 
-            TxtSource.Location = new Point(82, 37);
+            TxtSource.Location = new Point(84, 32);
             TxtSource.Name = "TxtSource";
             TxtSource.ReadOnly = true;
-            TxtSource.Size = new Size(387, 23);
+            TxtSource.Size = new Size(316, 27);
             TxtSource.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 92);
+            label2.Location = new Point(28, 71);
             label2.Name = "label2";
-            label2.Size = new Size(31, 15);
+            label2.Size = new Size(39, 20);
             label2.TabIndex = 1;
             label2.Text = "타겟";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 37);
+            label1.Location = new Point(28, 35);
             label1.Name = "label1";
-            label1.Size = new Size(31, 15);
+            label1.Size = new Size(39, 20);
             label1.TabIndex = 0;
             label1.Text = "소스";
             // 
             // FrmMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(575, 220);
+            ClientSize = new Size(497, 213);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
@@ -161,6 +162,7 @@
         #endregion
 
         private GroupBox groupBox1;
+        private Label label1;
         private ProgressBar PrgProcess;
         private Button BtnAsyncCopy;
         private Button BtnSyncCopy;
@@ -169,6 +171,5 @@
         private TextBox TxtTarget;
         private TextBox TxtSource;
         private Label label2;
-        private Label label1;
     }
 }

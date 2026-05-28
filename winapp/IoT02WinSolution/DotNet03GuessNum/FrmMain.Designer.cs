@@ -30,27 +30,36 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             LblDisplay = new Label();
+            TxtNum = new TextBox();
             BtnCheck = new Button();
             BtnStart = new Button();
-            TxtNum = new TextBox();
             SuspendLayout();
             // 
             // LblDisplay
             // 
             LblDisplay.Dock = DockStyle.Top;
-            LblDisplay.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LblDisplay.Font = new Font("맑은 고딕", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LblDisplay.Location = new Point(0, 0);
             LblDisplay.Name = "LblDisplay";
-            LblDisplay.Size = new Size(240, 33);
+            LblDisplay.Size = new Size(365, 38);
             LblDisplay.TabIndex = 0;
             LblDisplay.Text = "게임을 시작합니다";
-            LblDisplay.TextAlign = ContentAlignment.TopCenter;
+            LblDisplay.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // TxtNum
+            // 
+            TxtNum.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TxtNum.Location = new Point(62, 53);
+            TxtNum.Name = "TxtNum";
+            TxtNum.Size = new Size(125, 34);
+            TxtNum.TabIndex = 1;
             // 
             // BtnCheck
             // 
-            BtnCheck.Location = new Point(137, 36);
+            BtnCheck.Font = new Font("맑은 고딕", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnCheck.Location = new Point(193, 53);
             BtnCheck.Name = "BtnCheck";
-            BtnCheck.Size = new Size(75, 23);
+            BtnCheck.Size = new Size(110, 34);
             BtnCheck.TabIndex = 2;
             BtnCheck.Text = "확인";
             BtnCheck.UseVisualStyleBackColor = true;
@@ -59,31 +68,25 @@
             // BtnStart
             // 
             BtnStart.Dock = DockStyle.Bottom;
-            BtnStart.Font = new Font("맑은 고딕", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            BtnStart.Location = new Point(0, 72);
+            BtnStart.Font = new Font("맑은 고딕", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BtnStart.Location = new Point(0, 114);
             BtnStart.Name = "BtnStart";
-            BtnStart.Size = new Size(240, 23);
+            BtnStart.Size = new Size(365, 37);
             BtnStart.TabIndex = 3;
             BtnStart.Text = "게임 시작";
             BtnStart.UseVisualStyleBackColor = true;
             BtnStart.Click += BtnStart_Click;
             // 
-            // TxtNum
-            // 
-            TxtNum.Location = new Point(33, 36);
-            TxtNum.Name = "TxtNum";
-            TxtNum.Size = new Size(100, 23);
-            TxtNum.TabIndex = 1;
-            // 
             // FrmMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(240, 95);
-            Controls.Add(TxtNum);
+            ClientSize = new Size(365, 151);
             Controls.Add(BtnStart);
             Controls.Add(BtnCheck);
+            Controls.Add(TxtNum);
             Controls.Add(LblDisplay);
+            Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -97,8 +100,8 @@
         #endregion
 
         private Label LblDisplay;
+        private TextBox TxtNum;
         private Button BtnCheck;
         private Button BtnStart;
-        private TextBox TxtNum;
     }
 }

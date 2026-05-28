@@ -1,6 +1,6 @@
 ﻿namespace DotNet06DbBooksApp
 {
-    partial class FmBook
+    partial class FrmBook
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,11 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FmBook));
-            BtnLoad = new MaterialSkin.Controls.MaterialButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBook));
             DgvBooks = new DataGridView();
+            BtnLoad = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)DgvBooks).BeginInit();
             SuspendLayout();
+            // 
+            // DgvBooks
+            // 
+            DgvBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvBooks.Location = new Point(6, 71);
+            DgvBooks.Name = "DgvBooks";
+            DgvBooks.RowHeadersWidth = 51;
+            DgvBooks.Size = new Size(900, 397);
+            DgvBooks.TabIndex = 0;
             // 
             // BtnLoad
             // 
@@ -42,38 +52,29 @@
             BtnLoad.Depth = 0;
             BtnLoad.HighEmphasis = true;
             BtnLoad.Icon = null;
-            BtnLoad.Location = new Point(635, 405);
+            BtnLoad.Location = new Point(841, 477);
             BtnLoad.Margin = new Padding(4, 6, 4, 6);
             BtnLoad.MouseState = MaterialSkin.MouseState.HOVER;
             BtnLoad.Name = "BtnLoad";
             BtnLoad.NoAccentTextColor = Color.Empty;
             BtnLoad.Size = new Size(64, 36);
-            BtnLoad.TabIndex = 0;
+            BtnLoad.TabIndex = 1;
             BtnLoad.Text = "Load";
             BtnLoad.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             BtnLoad.UseAccentColor = false;
             BtnLoad.UseVisualStyleBackColor = true;
             BtnLoad.Click += BtnLoad_Click;
             // 
-            // DgvBooks
+            // FrmBook
             // 
-            DgvBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            DgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvBooks.Location = new Point(6, 67);
-            DgvBooks.Name = "DgvBooks";
-            DgvBooks.Size = new Size(788, 329);
-            DgvBooks.TabIndex = 1;
-            // 
-            // FmBook
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(DgvBooks);
+            ClientSize = new Size(912, 522);
             Controls.Add(BtnLoad);
+            Controls.Add(DgvBooks);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(490, 350);
-            Name = "FmBook";
+            Name = "FrmBook";
             Text = "MySQL Books";
             Load += FrmBook_Load;
             ((System.ComponentModel.ISupportInitialize)DgvBooks).EndInit();
@@ -81,9 +82,13 @@
             PerformLayout();
         }
 
+
+
+
+
         #endregion
 
-        private MaterialSkin.Controls.MaterialButton BtnLoad;
         private DataGridView DgvBooks;
+        private MaterialSkin.Controls.MaterialButton BtnLoad;
     }
 }
