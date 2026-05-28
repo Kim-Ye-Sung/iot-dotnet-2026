@@ -163,7 +163,7 @@ namespace DotNet04ControlsApp
         // 픽쳐박스 컨트롤 클릭이벤트 핸들러
         private void PicImage_Click(object sender, EventArgs e)
         {
-            if(PicImage.SizeMode == PictureBoxSizeMode.CenterImage)
+            if (PicImage.SizeMode == PictureBoxSizeMode.CenterImage)
             {
                 PicImage.SizeMode = PictureBoxSizeMode.StretchImage;
             }
@@ -171,6 +171,35 @@ namespace DotNet04ControlsApp
             {
                 PicImage.SizeMode = PictureBoxSizeMode.CenterImage;
             }
+        }
+
+        private void BtnNoThread_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnThread_Click(object sender, EventArgs e)
+        {
+            // 진행바 초기화
+            var maximum = 100;
+            var minimum = 0;
+            var currValue = 0;
+            TxtLog.Clear();
+            PrgProcess.Maximum = maximum;
+            PrgProcess.Minimum = minimum;
+
+            BtnThread.Enabled = false;
+            BtnNoThread.Enabled = false;
+            BtnStop.Enabled = true;
+
+            // 내부처리 작업을 백그라운드워커에 이벤트로 분리해야함
+            WrkProcess.WorkerReportsProgress = true;
+            WrkProcess.WorkerSupportsCancellation = true;
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

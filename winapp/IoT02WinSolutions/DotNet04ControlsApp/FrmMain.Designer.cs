@@ -53,15 +53,22 @@
             BtnLoadImg = new Button();
             PicImage = new PictureBox();
             groupBox5 = new GroupBox();
-            groupBox6 = new GroupBox();
+            BtnStop = new Button();
+            BtnThread = new Button();
+            BtnNoThread = new Button();
+            PrgProcess = new ProgressBar();
+            TxtLog = new TextBox();
+            powe = new GroupBox();
             DlgOpenFile = new OpenFileDialog();
             saveFileDialog1 = new SaveFileDialog();
+            WrkProcess = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TrkStatus).BeginInit();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PicImage).BeginInit();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -295,6 +302,11 @@
             // groupBox5
             // 
             groupBox5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox5.Controls.Add(BtnStop);
+            groupBox5.Controls.Add(BtnThread);
+            groupBox5.Controls.Add(BtnNoThread);
+            groupBox5.Controls.Add(PrgProcess);
+            groupBox5.Controls.Add(TxtLog);
             groupBox5.Location = new Point(401, 330);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(386, 212);
@@ -302,15 +314,61 @@
             groupBox5.TabStop = false;
             groupBox5.Text = "스레드";
             // 
-            // groupBox6
+            // BtnStop
             // 
-            groupBox6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            groupBox6.Location = new Point(790, 12);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(386, 530);
-            groupBox6.TabIndex = 4;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "텍스트 에디터";
+            BtnStop.Location = new Point(305, 179);
+            BtnStop.Name = "BtnStop";
+            BtnStop.Size = new Size(75, 23);
+            BtnStop.TabIndex = 4;
+            BtnStop.Text = "button3";
+            BtnStop.UseVisualStyleBackColor = true;
+            BtnStop.Click += BtnStop_Click;
+            // 
+            // BtnThread
+            // 
+            BtnThread.Location = new Point(210, 179);
+            BtnThread.Name = "BtnThread";
+            BtnThread.Size = new Size(75, 23);
+            BtnThread.TabIndex = 3;
+            BtnThread.Text = "button2";
+            BtnThread.UseVisualStyleBackColor = true;
+            BtnThread.Click += BtnThread_Click;
+            // 
+            // BtnNoThread
+            // 
+            BtnNoThread.Location = new Point(113, 179);
+            BtnNoThread.Name = "BtnNoThread";
+            BtnNoThread.Size = new Size(75, 23);
+            BtnNoThread.TabIndex = 2;
+            BtnNoThread.Text = "button1";
+            BtnNoThread.UseVisualStyleBackColor = true;
+            BtnNoThread.Click += BtnNoThread_Click;
+            // 
+            // PrgProcess
+            // 
+            PrgProcess.Location = new Point(6, 150);
+            PrgProcess.Name = "PrgProcess";
+            PrgProcess.Size = new Size(374, 23);
+            PrgProcess.TabIndex = 1;
+            // 
+            // TxtLog
+            // 
+            TxtLog.BorderStyle = BorderStyle.FixedSingle;
+            TxtLog.Location = new Point(6, 22);
+            TxtLog.Multiline = true;
+            TxtLog.Name = "TxtLog";
+            TxtLog.Size = new Size(374, 122);
+            TxtLog.TabIndex = 0;
+            // 
+            // powe
+            // 
+            powe.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            powe.Location = new Point(790, 12);
+            powe.Name = "powe";
+            powe.Size = new Size(386, 530);
+            powe.TabIndex = 4;
+            powe.TabStop = false;
+            powe.Text = "텍스트 에디터";
             // 
             // DlgOpenFile
             // 
@@ -324,7 +382,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 561);
-            Controls.Add(groupBox6);
+            Controls.Add(powe);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -343,6 +401,8 @@
             groupBox3.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PicImage).EndInit();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -353,7 +413,7 @@
         private GroupBox groupBox3;
         private GroupBox groupBox5;
         private GroupBox groupBox4;
-        private GroupBox groupBox6;
+        private GroupBox powe;
         private Label label1;
         private CheckBox ChkItalic;
         private ComboBox TxtResult;
@@ -374,5 +434,11 @@
         private SaveFileDialog saveFileDialog1;
         private Button BtnLoadImg;
         private PictureBox PicImage;
+        private TextBox TxtLog;
+        private Button BtnStop;
+        private Button BtnThread;
+        private Button BtnNoThread;
+        private ProgressBar PrgProcess;
+        private System.ComponentModel.BackgroundWorker WrkProcess;
     }
 }
