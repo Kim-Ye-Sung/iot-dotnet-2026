@@ -302,13 +302,85 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 
 ![alt text](image-11.png)
 
-### 키오스크 앱
-- 결재이전까지 동작
+#### DB연동 앱 - 데이터 추가, 수정, 삭제
+
+- INSERT, UPDATE, DELETE 기능 구현
+
+![alt text](image-12.png)
+
+
+#### C# 개발 Tip
+- C# 문법 중 새 객체 생성할때 초기화 방법
+
+    ```cs
+    // 전통적인 속성 할당 방식 객체 생성방식
+    DataGridViewTextBoxColumn colBookIdx = new DataGridViewTextBoxColumn();
+    colBookIdx.Name = "book_idx";
+    colBookIdx.HeaderText = "순번";   // 화면표시컬럼명
+    colBookIdx.DataPropertyName = "book_idx";
+    colBookIdx.ReadOnly = true; // PK는 수정하면 안됨!!
+    ```
+
+    ```cs
+    // C# 3.0 이후 객체 이니셜라이저 방식
+    DataGridViewTextBoxColumn colBookIdx = new DataGridViewTextBoxColumn
+    {
+    Name = "book_idx",
+    HeaderText = "순번", // 화면표시 컬럼명
+    DataPropertyName = "book_idx",
+    ReadOnly = true  // PK는 수정하면 안됨!!
+    };
+    ```
+
+## 웹앱
+
+
+## 서버 클라이언트
+
+![alt text](image-13.png)
+
+### ASP.NET
+
+![alt text](image-14.png)
+
+### ASP.NET API 서버
+1. 새 프로젝트 - ASP.NET Core 웹 API
+2. 위와 동일
+3. OpenAPI, 컨트롤러 사용 체크 나머지 동인
+4. 서버 실행
+    - Get으로 데이터 조회 https://localhost:portnum/weatherforecast/
+    - 서버 상태 확인 https://localhost:portnum/openapi/v1.json
+
+    ![alt text](image-15.png)
+
+### Http 메서드
+- GET - Select와 동일, 조회
+- POST - Insert와 동일, 등록 위주. 수정, 삭제도 가능
+- PUT - Update와 동일, 수정
+- DELETE - Delete와 동일. 삭제
+
+## 유니티
+
+- 게임엔진 : Unity(C#), Unreal(C++), Blender(Python), Godot Engine(C#)
+- Unity 특장점
+    - 구현 쉽다. 툴 실행이 빠르다.
+    - 인더스트리 분야 진입 속도가 빠름
+    - 캐주얼 게임, 디지털 트윈(현실세계와 가상세계를 일치화)
+
+### 유니티 설치
+
+- https://unity.com/ 에서 회원가입, 로그인 후 다운로드
+- 유니티 허브  설치 
+- 유니티 허브 실행 > 로그인
+- Personal License 
 
 ### OpenAPI연동 앱
 - 미세먼지 모니터링앱
 - 국가교통정보 CCTV뷰 앱
 - IoT 모니터링앱
 
+### 키오스크 앱
+- 결재이전까지 동작하는 버전
+- WPF를 사용해서 구현
 
 ### 라이브러리 만들기
