@@ -1,4 +1,4 @@
-namespace DotNet12BooksAPI
+namespace DotNet12BooksApi
 {
     public class WeatherForecast
     {

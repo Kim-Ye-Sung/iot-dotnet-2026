@@ -41,11 +41,10 @@
             // 
             DgvBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DgvBooks.Location = new Point(5, 69);
-            DgvBooks.Margin = new Padding(2);
+            DgvBooks.Location = new Point(6, 71);
             DgvBooks.Name = "DgvBooks";
             DgvBooks.RowHeadersWidth = 51;
-            DgvBooks.Size = new Size(721, 286);
+            DgvBooks.Size = new Size(900, 397);
             DgvBooks.TabIndex = 0;
             // 
             // BtnLoad
@@ -56,8 +55,8 @@
             BtnLoad.Depth = 0;
             BtnLoad.HighEmphasis = true;
             BtnLoad.Icon = null;
-            BtnLoad.Location = new Point(436, 360);
-            BtnLoad.Margin = new Padding(3, 4, 3, 4);
+            BtnLoad.Location = new Point(616, 477);
+            BtnLoad.Margin = new Padding(4, 6, 4, 6);
             BtnLoad.MouseState = MaterialSkin.MouseState.HOVER;
             BtnLoad.Name = "BtnLoad";
             BtnLoad.NoAccentTextColor = Color.Empty;
@@ -77,14 +76,14 @@
             BtnNew.Depth = 0;
             BtnNew.HighEmphasis = true;
             BtnNew.Icon = null;
-            BtnNew.Location = new Point(507, 360);
+            BtnNew.Location = new Point(688, 477);
             BtnNew.Margin = new Padding(4, 6, 4, 6);
             BtnNew.MouseState = MaterialSkin.MouseState.HOVER;
             BtnNew.Name = "BtnNew";
             BtnNew.NoAccentTextColor = Color.Empty;
             BtnNew.Size = new Size(64, 36);
             BtnNew.TabIndex = 2;
-            BtnNew.Text = "New";
+            BtnNew.Text = "NEW";
             BtnNew.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             BtnNew.UseAccentColor = false;
             BtnNew.UseVisualStyleBackColor = true;
@@ -98,14 +97,14 @@
             BtnEdit.Depth = 0;
             BtnEdit.HighEmphasis = true;
             BtnEdit.Icon = null;
-            BtnEdit.Location = new Point(579, 360);
+            BtnEdit.Location = new Point(760, 477);
             BtnEdit.Margin = new Padding(4, 6, 4, 6);
             BtnEdit.MouseState = MaterialSkin.MouseState.HOVER;
             BtnEdit.Name = "BtnEdit";
             BtnEdit.NoAccentTextColor = Color.Empty;
             BtnEdit.Size = new Size(64, 36);
             BtnEdit.TabIndex = 3;
-            BtnEdit.Text = "Edit";
+            BtnEdit.Text = "EDIT";
             BtnEdit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             BtnEdit.UseAccentColor = false;
             BtnEdit.UseVisualStyleBackColor = true;
@@ -119,14 +118,14 @@
             BtnDelete.Depth = 0;
             BtnDelete.HighEmphasis = true;
             BtnDelete.Icon = null;
-            BtnDelete.Location = new Point(651, 360);
+            BtnDelete.Location = new Point(832, 477);
             BtnDelete.Margin = new Padding(4, 6, 4, 6);
             BtnDelete.MouseState = MaterialSkin.MouseState.HOVER;
             BtnDelete.Name = "BtnDelete";
             BtnDelete.NoAccentTextColor = Color.Empty;
             BtnDelete.Size = new Size(73, 36);
             BtnDelete.TabIndex = 4;
-            BtnDelete.Text = "Delete";
+            BtnDelete.Text = "DELETE";
             BtnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             BtnDelete.UseAccentColor = false;
             BtnDelete.UseVisualStyleBackColor = true;
@@ -134,19 +133,17 @@
             // 
             // FrmBook
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(730, 404);
+            ClientSize = new Size(912, 522);
             Controls.Add(BtnDelete);
             Controls.Add(BtnEdit);
             Controls.Add(BtnNew);
             Controls.Add(BtnLoad);
             Controls.Add(DgvBooks);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(2);
-            MinimumSize = new Size(381, 262);
+            MinimumSize = new Size(490, 350);
             Name = "FrmBook";
-            Padding = new Padding(2, 48, 2, 2);
             Text = "MySQL Books";
             Load += FrmBook_Load;
             ((System.ComponentModel.ISupportInitialize)DgvBooks).EndInit();

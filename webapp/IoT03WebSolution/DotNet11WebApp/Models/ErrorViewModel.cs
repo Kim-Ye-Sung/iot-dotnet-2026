@@ -1,4 +1,4 @@
-namespace DotNet11wepapp.Models
+namespace DotNet11WebApp.Models
 {
     public class ErrorViewModel
     {

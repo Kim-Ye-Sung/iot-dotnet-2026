@@ -40,7 +40,7 @@ namespace DotNet06DbBooksApp
             return dt;
         }
 
-        // INSERT, UPDATE, DELETE 쿼리 실행
+        // INSERT, UPDATE, DELETE 쿼리실행
         public int Execute(string sql)
         {
             using (MySqlConnection conn = new MySqlConnection(connStr))
@@ -49,7 +49,7 @@ namespace DotNet06DbBooksApp
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    return cmd.ExecuteNonQuery();   // INSERT, UPDATE, DELETE 쿼리를 실행
+                    return cmd.ExecuteNonQuery();  // INSERT, UPDATE, DELETE 쿼리를 실행
                 }
             }
         }

@@ -1,4 +1,4 @@
-namespace DotNet11wepapp
+namespace DotNet11WebApp
 {
     public class Program
     {

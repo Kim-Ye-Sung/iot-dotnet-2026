@@ -1,8 +1,8 @@
-using DotNet11wepapp.Models;
+using DotNet11WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace DotNet11wepapp.Controllers
+namespace DotNet11WebApp.Controllers
 {
     public class HomeController : Controller
     {

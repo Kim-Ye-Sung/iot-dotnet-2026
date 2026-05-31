@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNet12BooksAPI.Controllers
+namespace DotNet12BooksApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
