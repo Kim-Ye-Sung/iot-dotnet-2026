@@ -395,7 +395,7 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 
 - 유니티 허브
 - 3D (Built-in Render pipeline)선택
-- Project name 입력, Location 확인
+- Project name 입력, Location 확인 
 - Create Project 클릭
 - Unity Editor 팝업
 
@@ -404,7 +404,7 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
     - 좌우 : 화면 이동
     - 위아래 : 줌인/아웃
 - Shift : 방향이동 가속
-- 마우스
+- 마우스 
     - 왼쪽 버튼 : 오브젝트 선택
     - 오른쪽 버튼 : 시점 변환
     - 스크롤 : 줌인/아웃
@@ -443,12 +443,12 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 
 ### WPF 특징
 
-- XAML 사용 - 안드로이드, Qt등의 기존 XML 기반의 디자인 기능
+- XAML 사용 - 안드로이드, Qt등의 기존 XML 기반의 디자인 가능
     - 드래그앤드랍으로 기본 디자인 후 세밀한 조정은 코딩으로 가능
 
     ```xml
-    <Button Content="클릭" Width="100" Height="40"/>
-    ``` 
+    <Button Content="클릭" Width="100" Height="40" />
+    ```
 
     - xaml 디자이너
 
@@ -457,30 +457,30 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 - GPU 가속 렌더링
     - WinForms CPU기반 GDI+ 렌더링으로 복잡하고 느렸음
     - DirectX 기반으로 그래픽 처리가 부드럽다
-        - 애니메이션, 3D, 반투명효과, 그림자, 블러...
+    - 애니메이션, 3D, 반투명효과, 그림자, 블러...
 
 - 스타일, 테마 적용이 쉬움
     - XML 기반, HTML의 CSS와 유사
     - 디자인 자유도가 아주 높음
-
+    
 ### WPF 프로젝트 구성
-- App.xaml : 프로그램 시작점에 들어가는 스타일 등(static void Main과 유사)
+- App.xaml : 프로그램 시작점에 들어가는 스타일 등(static void Main과 유사)  
     - App.xaml.cs : 프로그램 시작점에 들어가는 초기화 로직
 - MainWindow.xaml : 메인폼 디자인과 동일
-    - MainWindow.xaml.cs : 코드비하인드
+    -  MainWindow.xaml.cs : 코드비하인드
 
 ### WPF MainWindow.xaml 디자인 순서
-1. Grid, StackPanel, Canvas 등으로 화면 구역 나누기
+1. `Grid`, StackPanel, Canvas 등으로 화면 구역 나누기
 2. 구역별로 컨트롤 배치
 3. xaml 수정
     - Blend for Visual Studio에서 디자이너가 작업
     - Visual Studio에 반영
-4. xaml.cs 비하인드 코드 작성
+4. xaml.cs 비하인드코드 작성
     - 모든 객체는 Margin(외부여백), Padding(내부여백)
-    - Anchoring 표시 : 체인이 연결/끊김으로 표시
+    - Achoring 표시 : 체인이 연결/끊김으로 표시
     ![alt text](image-17.png)
 
-    - 그리드를 나누는 표시
+    - 그리드를 나누는 표시 
     - 각 나눈 영역은 n배(*)로 표시
     - *가 없으면 픽셀 고정 사이즈
     ![alt text](image-18.png)
@@ -495,10 +495,10 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 ![alt text](image-19.png)
 
 #### 화면 레이아웃 구성
-- Grid : 가장 기본. 내부 들어오는 객체가 그리드셸을 가득 채움(Margin이 없을때)
-    - Margin : 숫자 하나(상하좌우 동일 여백), 두개(좌우/상하), 네개(좌,상,우,하 여백)
+- Grid : 가장 기본. 내부들어오는 객체가 그리드셸을 가득 채움(Margin이 없을때)
+    - Margin : 숫자하나(상하좌우 동일 여백), 두개(좌우/상하), 네개(좌,상,우,하 여백)
 - StackPanel : 내부의 객체가 순차적으로 쌓임. 수평/수직
-    - Orientation="Verical"이 기본
+    - Orientation="Vertical"이 기본
 - DockPanel : 내부의 객체를 상하좌우 중앙으로 분리
     - DockPanel.Dock에 Left, Right, Top, Bottom으로 위치지정
 - Canvas : 
@@ -506,15 +506,23 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 #### 이미지, 동영상
 - 이미지 - 솔루션 탐색기 선택
     - 속성 > 빌드 작업 `리소스` 변경
-- 동영상 - 솔루션 탐색기 선택 
-    - 속성 > 빌드 작업 `내용`으로 변경.
+- 동영상 - 솔루션 탐색기 선택
+    - 속성 > 빌드 작업 `내용`으로 변경
     - 출력 디렉토리로 복사 `새 버전이면 복사`, `항상 복사` 중 선택
     - bin 아래 debug/release 폴더에 복사
     - MediaElement Source 할당작업을 코드비하인드에서 처리
 
-#### 컨트럴 디자인
+#### 컨트롤 디자인
 
-- 일반 버튼
+- 일반 버튼 원본
+
+```xml
+<Button Margin="50" Click="Button_Click" Content="Press Me">
+</Button>
+```
+![alt text](image-20.png)
+
+- Button.Template 속성을 변경
 
 ```xml
 <Button Margin="50" Click="Button_Click" Content="Press Me">
@@ -530,19 +538,39 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
     </Button.Template>
 </Button>
 ```
-![alt text](image-20.png)
 
 ![alt text](image-21.png)
 
-![alt text](image-22.png)
-
-![alt text](image-23.png)
-
-![alt text](image-24.png)
-
 - ControlTemplate TargetType을 Button 지정
 - 보통 Grid(객체들이 겹쳐서 표현되기 때문) 안에 여러 객체를 위치
-- 부모객체(Button)의 속성을 가져다 쓰려면 {TemplateBinding 속성명} 형태로 설정
+- 부모객체(Button)의 속성을 가져다 쓰려면 `{TemplateBinding 속성명}` 형태로 설정
+
+```xml
+<Button Margin="50" Click="Button_Click" Content="Press Me">
+    <Button.Template>
+        <ControlTemplate TargetType="Button">
+            <Grid>
+                <Rectangle RadiusX="12" RadiusY="12" 
+                           Fill="#25A3FB" Stroke="DarkBlue" StrokeThickness="4">
+                    <Rectangle.Effect>
+                        <DropShadowEffect Color="Black"
+                                          BlurRadius="15"
+                                          ShadowDepth="5"
+                                          Direction="320"
+                                          Opacity="0.5" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Label Content="{TemplateBinding Content}" 
+                       Foreground="White" FontSize="20" FontWeight="ExtraBold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </ControlTemplate>
+    </Button.Template>
+</Button>
+```
+- 그림자 추가
+
+![alt text](image-22.png)
 
 #### 리소스 디자인
 
@@ -555,13 +583,83 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
 
 - Page.Resources, Window.Resources, Application.Resource 태그 내에 작성
 
-- x:key를 삭제하면 페이지, 창, 프로젝트내 모든 객체에 바로 적용
+```xml
+<!-- 기본틀 -->
+<Style x:Key="BlueShadowButtonStyle" TargetType="Button">
+    <Setter Property="Template">
+        <Setter.Value>
+           <!-- 컨트롤 디자인 내용 붙여넣으면 끝! --> 
+           <!-- ControlTemplate 하위만 복사 -->
+        </Setter.Value>
+    </Setter>
+</Style>
+```
 
-- App.xaml
+- x:Key를 삭제하면 페이지, 창, 프로젝트내 모든 객체에 바로 적용
 
-#### Presenter(나중에)
+![alt text](image-23.png)
+
+- Key를 적용하려면 해당 객체에 Style 속성 사용
+    - `Style="{StaticResource BlueShadowButtonStyle}"`
+
+- 리소스 파일로 저장하고 로드하기
+
+```xml
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- x:Key 는 나중에 -->
+    <Style TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle RadiusX="12" RadiusY="12" 
+    Fill="#25A3FB" Stroke="DarkBlue" StrokeThickness="4">
+                            <Rectangle.Effect>
+                                <DropShadowEffect Color="Black"
+                   BlurRadius="15"
+                   ShadowDepth="5"
+                   Direction="320"
+                   Opacity="0.5" />
+                            </Rectangle.Effect>
+                        </Rectangle>
+                        <Label Content="{TemplateBinding Content}" 
+Foreground="White" FontSize="20" FontWeight="ExtraBold"
+HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+```
+
+- App.xaml에서 로드 - 최종방식
+
+```xml
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="/ButtonStyles.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+</Application.Resources>
+```
+
+![alt text](image-24.png)
+
+### Modern Design 적용
+
+### 데이터바인딩
+
+
+### 리소스 디자인 추가
+
+#### Presenter (나중에)
 
 - 컨트롤의 실제 내용을 화면에 표시하는 자리
+
+
 
 ### OpenAPI연동 앱
 - 미세먼지 모니터링앱

@@ -7,5 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.864,0.715" StartPoint="0.096,0.726">
+                <GradientStop Color="#FFF3E2E2"/>
+                <GradientStop Color="#FF6A6767" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Path Fill="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Margin="34,26,612,287" Stroke="#FFD22828" Stretch="Fill" StrokeThickness="10.6">
+            <Path.Data>
+                <PathGeometry Figures="M5.3,19.1 C5.3,11.47847 11.47847,5.3 19.1,5.3 L146.9,5.3 C154.52153,5.3 160.7,11.47847 160.7,19.1 L160.7,117.9 C160.7,125.52153 154.52153,131.7 146.9,131.7 L19.1,131.7 C11.47847,131.7 5.3,125.52153 5.3,117.9 z"/>
+            </Path.Data>
+        </Path>
+
     </Grid>
 </Window>

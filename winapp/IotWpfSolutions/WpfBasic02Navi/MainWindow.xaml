@@ -20,6 +20,6 @@
         </Grid.ColumnDefinitions>
 
         <!-- 프레임에 페이지를 추가 -->
-        <Frame Grid.Row="1" Grid.Column="1" Background="Azure" Source="/MenuPage.xaml"/>
+        <Frame Grid.Row="1" Grid.Column="1" Background="Azure" Source="/MenuPage.xaml" />
     </Grid>
 </Window>

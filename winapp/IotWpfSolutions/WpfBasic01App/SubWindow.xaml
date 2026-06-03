@@ -17,8 +17,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-    <Button x:Name="ButtonCheck"  
-            Grid.Column="1" Grid.Row="1" Content="확인" FontSize="20" 
-            Click="ButtonCheck_Click"/>
+        
+        <Button x:Name="BtnCheck" 
+                Grid.Column="1" Grid.Row="1" Content="확인" FontSize="20" 
+                Click="BtnCheck_Click" />
+
     </Grid>
 </Window>

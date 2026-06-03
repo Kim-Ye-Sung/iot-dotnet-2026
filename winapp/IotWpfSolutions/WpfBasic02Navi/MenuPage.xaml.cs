@@ -31,7 +31,6 @@ namespace WpfBasic02Navi
         private void BtnMenu02_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Sub02Page.xaml", UriKind.RelativeOrAbsolute));
-
         }
     }
 }

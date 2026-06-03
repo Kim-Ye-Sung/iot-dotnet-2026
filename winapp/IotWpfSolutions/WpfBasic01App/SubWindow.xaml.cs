@@ -27,10 +27,9 @@ namespace WpfBasic01App
             MessageBox.Show("클릭했어요!", "클릭이벤트", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void ButtonCheck_Click(object sender, RoutedEventArgs e)
+        private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("클릭했어요aaa!", "클릭이벤트", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+            MessageBox.Show("클릭했어요2!", "클릭이벤트", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }

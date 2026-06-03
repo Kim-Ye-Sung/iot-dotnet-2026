@@ -18,8 +18,7 @@ namespace WpfBasic02Navi
     /// </summary>
     public partial class Sub02Page : Page
     {
-        
-        List<Employee> employees;   // employee 컬렉션 추가
+        public List<Employee> employees;  // employee 컬렉션 선언
 
         public Employee SelectedEmployee { get; set; }
 
@@ -28,12 +27,11 @@ namespace WpfBasic02Navi
             InitializeComponent();
         }
 
-        
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            // 초기화
             employees = new List<Employee>
             {
-                // 초기화
                 new Employee
                 {
                     Id = 1,
@@ -86,7 +84,7 @@ namespace WpfBasic02Navi
             };
 
             // 데이터그리드 할당
-            DgrEmployees.ItemsSource = employees;   
+            DgrEmployees.ItemsSource = employees;
         }
     }
 }
