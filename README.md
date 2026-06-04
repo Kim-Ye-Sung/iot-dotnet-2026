@@ -648,9 +648,35 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 ![alt text](image-24.png)
 
-### Modern Design 적용
-
 ### 데이터바인딩
+
+- 현재 대부분 앱은 데이터 중심
+    - 데이터저장소(DB, 파일시스템, 클라우드, OpenAPI)의 데이터를 가져와서 표시
+    - 신규, 변경, 저장소에 다시 저장
+
+- 바인딩 패턴
+    - Early Binding(static) - 컴파일 시점에서 바인딩 결정
+    - `Lazy Binding(dynamic)` - 런타임 시점에서 바인딩 결정
+
+- 바인딩 방법
+    ```xml
+    <TextBox Text="{Binding 속성값}">
+
+    <TextBox Text="{Binding Path=속성값}">
+
+    <!-- 컨트롤명에 속하는 속성값이 표시, 여기에 새 값을 입력하면 컨트롤이 상호작용-->
+    <TextBox Text="{Binding Source={StaticResource 이름}, Path=속성값}">
+    ```
+
+- 슬라이더와 프로그래스바 바인딩
+
+    ```xml
+    <Slider x:Name="SliderTest", Value="20" />
+    <ProgressBar Value="{Binding Value, ElementName=SliderTest}" />
+    ```
+
+
+### Modern Design 적용
 
 
 ### 리소스 디자인 추가
