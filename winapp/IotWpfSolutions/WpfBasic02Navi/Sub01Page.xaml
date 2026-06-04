@@ -8,9 +8,9 @@
       d:DesignHeight="520" d:DesignWidth="890"
       Title="단순 컨트롤" Loaded="Page_Loaded">
     <Page.Resources>
-        
+
     </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -50,12 +50,24 @@
 
         <Canvas Grid.Row="2" Grid.Column="0" Background="LightGray" ClipToBounds="True">
             <Rectangle Width="100" Height="100" 
-                       Fill="Red" Stroke="CadetBlue" StrokeThickness="5"
+                       Fill="Red" Stroke="CadetBlue" 
+                       StrokeThickness="5"
                        Canvas.Left="-10" Canvas.Top="-40"/>
 
             <Ellipse Width="200" Height="100" 
-                     Fill="GreenYellow" Stroke="Yellow" StrokeThickness="4" StrokeDashArray="5,2" StrokeDashCap="Triangle"
-                     RenderTransformOrigin="0.5, 0.5" Canvas.Top="45"/>
+                     Fill="GreenYellow" Stroke="Yellow" 
+                     StrokeThickness="4" StrokeDashArray="5,2,1,2" 
+                     StrokeDashCap="Round"
+                     Canvas.Top="45" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
 
         </Canvas>
 

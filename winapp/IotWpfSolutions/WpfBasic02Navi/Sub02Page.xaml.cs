@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Security.Policy;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +26,7 @@ namespace WpfBasic02Navi
 
         public List<string> Departments { get; set; }
 
-        public string SelectedDepartments { get; set; }
+        public string SelectedDepartment { get; set; }
 
         public Sub02Page()
         {
@@ -42,7 +44,7 @@ namespace WpfBasic02Navi
                 "경영팀"
             };
 
-            // 초기화. DB에서 불러오는것과 유사
+            // 초기화. DB에서 불러오는 것과 유사
             Employees = new List<Employee>
             {
                 new Employee
@@ -97,7 +99,7 @@ namespace WpfBasic02Navi
             };
 
             // 데이터그리드 할당
-            this.DataContext = this;  // 코드비하인드의 모든 바인딩 객체를 화면에서 사용하겠다
+            this.DataContext = this;  // 코드비하인드의 모든 바인딩 객체를 화면상에서 사용하겠다
         }
     }
 }

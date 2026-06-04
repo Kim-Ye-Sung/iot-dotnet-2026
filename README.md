@@ -664,25 +664,25 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     <TextBox Text="{Binding Path=속성값}">
 
-    <!-- 컨트롤명에 속하는 속성값이 표시, 여기에 새 값을 입력하면 컨트롤이 상호작용-->
-    <TextBox Text="{Binding Source={StaticResource 이름}, Path=속성값}">
+    <!-- 컨트롤명에 속하는 속성값이 표시, 여기에 새 값을 입력하면 컨트롤이 상호작용 -->
+    <TextBox Text="{Binding Source={StaticResource 컨트롤명}, Path=속성값}">
     ```
 
 - 슬라이더와 프로그래스바 바인딩
 
     ```xml
-    <Slider x:Name="SliderTest" Minimum="0" Maximum="100" TickFrequency="10" Value="20" />
-    <ProgressBar Minimum="0" Maximum="100" Value="{Binding Value, ElementName=SliderTest}" Height="20" />
+    <Slider x:Name="SliderTest" Value="20" />
+    <ProgressBar Value="{Binding Value, ElementName=SliderTest}"  />
     ```
 
 - 바인딩모드
 
     | 모드 | 방향 | 내용 |
-    | :--: | :--: | :-- |
+    | :--: | :--: | :--- |
     | OneTime | ViewModel(데이터) -> 화면(한번만) | 고정제목, 버전정보, 회사명 |
     | OneWay | ViewModel -> 화면(계속) | 시계, 주식가격, 센서값, 상태표시 |
-    | OneWayToSource | 화면 -> ViewModel | 거의 사용안함. 스크롤위치 저장 | 
-    | `TwoWay` | ViewModel <-> 화면 | WPF MVVM 핵심 |
+    | OneWayToSource | 화면 -> ViewModel | 거의 사용안함. 스크롤위치 저장 |
+    | `TwoWay` | ViewModel <-> 화면 | WPF MVVM핵심 |
 
 - 도구상자 컨트롤별 기본값
     - TextBlock, Label, Rectangle, Image, ProgressBar 는 OneWay, 나머지는 거의 TwoWay
@@ -693,7 +693,7 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 - DataContext : 데이터를 찾아올 위치. 바인딩되는 데이터를 화면상에서 적용
     - 어떤 객체에도 전부 할당 가능
-- ItemsSource : 목록콜렉션은 어느 컨트롤에 할당하는지 
+- ItemsSource : 목록컬렉션은 어느 컨트롤에 할당하는지 
 
 #### 데이터그리드, 컨트롤 바인딩
 1. 필요 데이터 속성 생성
@@ -702,7 +702,7 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
     public List<Employee> Employees { get; set; }  // employee 컬렉션 속성
 
     public Employee SelectedEmployee { get; set; }
-    
+
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
         // 데이터그리드 할당
@@ -713,15 +713,15 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     ```xml
     <!-- UI 디자이너 작업시 아래 내용 코딩 -->
-    <DataGrid x:Name="DgrEmployees"
-            IsReadOnly="True" 
-            SelectionMode="Single" 
-            ItemsSource="{Binding Employees}"
-            SelectedItem="{Binding SelectedEmployee}">
+    <DataGrid x:Name="DgrEmployees" 
+          IsReadOnly="True" 
+          SelectionMode="Single" 
+          ItemsSource="{Binding Employees}"
+          SelectedItem="{Binding SelectedEmployee}">
     </DataGrid>
 
     <GroupBox Header="상세정보" 
-          DataContext="{Binding SelectedItem, ElementName=DgrEmployees}">
+            DataContext="{Binding SelectedItem, ElementName=DgrEmployees}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -730,8 +730,8 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <TextBox Text="{Binding Id}" />
             <TextBox Text="{Binding Name}" />
-            <DatePicker Text="{Binding HireDate, Mode=TwoWay}"/>
-            <CheckBox IsChecked="{Binding IsActive}"/>
+            <DatePicker Text="{Binding HireDate, Mode=TwoWay}" />
+            <CheckBox IsChecked="{Binding IsActive}" />
     ```
 
 3. UI설계에 바인딩할 속성이 다 지정
@@ -746,13 +746,13 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 ### Modern Design 적용
 
-- UI디자인 프레임워크 사용
+- UI 디자인 프레임워크 사용
     - DevExpress : 윈앱이 무겁게 실행, 유료. Syncfusion, Telerik 등...
     - [HandyControl](https://github.com/handyorg/handycontrol) 무료
     - [MaterialDesignInXamlToolkit](https://github.com/materialdesigninxaml/materialdesigninxamltoolkit) - 무료
     - [MahApps](https://mahapps.com/) - 무료
 
-#### MahApps 적용
+#### MahApps.Metro 적용
 
 - NuGet 패키지로 설치
     - MahApps.Metro, MahApps.Metro.IconPacks
@@ -769,33 +769,38 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     ```xml
     <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-        <!-- Theme setting -->
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
-      </ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary.MergedDictionaries>
+            <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+            <!-- Theme setting -->
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+        </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
     ```
-
 - MainWindow.xaml xmlns추가, Window 태그 MetroWindow로 변경
 
     ```xml
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-        <!-- Theme setting -->
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
+    <mah:MetroWindow
+        x:Class="WpfBasic03UiApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        ...
     ```
-
 - MainWindow.xaml.cs의 부모클래스 Window -> MetroWindow로 변경
 
-![alt text](image-28.png)
+    ```cs
+    using MahApps.Metro.Controls;
+
+    namespace WpfBasic03UiApp
+    {
+        public partial class MainWindow : MetroWindow
+    ```
+
+    ![alt text](image-28.png)
 
 - 테마 : Light/Dark, 액센트 : Amber ~ Yellow 까지 23개
     - App.xaml의 Theme setting 리소스를 Light.Blue.xaml -> Dark.Mauve.xaml 등으로 변경하고 실행
@@ -805,10 +810,11 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     ```xml
     <TextBox 
-    x:Name="TxtAuthor" Grid.Row="1" Margin="5"
-    mah:TextBoxHelper.AutoWatermark="True"
-    mah:TextBoxHelper.Watermark="저자"
-    mah:TextBoxHelper.ClearTextButton="True"
+        x:Name="TxtAuthor" Grid.Row="1" Margin="5"
+        mah:TextBoxHelper.AutoWatermark="True"
+        mah:TextBoxHelper.Watermark="저자"
+        mah:TextBoxHelper.ClearTextButton="True"
+        mah:TextBoxHelper.UseFloatingWatermark="True"
     />
     <!-- UseFloatingWatermark 컨트롤 높이 조절 필요 -->
     ```
@@ -820,18 +826,19 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
         Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}"/>
     ```
 
-- 데이터그리드 
+- 데이터그리드 정렬
     - 왼쪽정렬 : 일반텍스트(길이 가변)
     - 중앙정렬 : 코드종류(길이 동일)
     - 오른쪽정렬 : 숫자, 가격 등
 
 ![alt text](image-29.png)
 
-
-#### DB연동 마무리
-
-- 데이터그리드 클릭 상세
-- 저장, 수정, 삭제 기능
+#### DB연동 객체리스트
+- Connection
+- Command
+- DataAdapter
+- DataReader
+- DataTable
 
 ### 리소스 디자인 추가
 

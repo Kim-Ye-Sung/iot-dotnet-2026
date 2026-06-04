@@ -13,7 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfBasic02Navi
-{
+{    
+
     /// <summary>
     /// Sub02Page.xaml에 대한 상호 작용 논리
     /// </summary>
@@ -34,7 +35,7 @@ namespace WpfBasic02Navi
             Car car = new Car
             {
                 Speed = 10.0,
-                Color = Colors.Black
+                Color = Colors.Black,
             };
 
             TxtSpeed.Text = car.Speed.ToString();
@@ -48,12 +49,18 @@ namespace WpfBasic02Navi
             {
                 Color color = (Color)ColorConverter.ConvertFromString(TxtColor.Text);
 
-                ScbColor.Color= color;
+                ScbColor.Color = color;
             }
             catch (Exception)
             {
                 Debug.WriteLine("색상변환 실패");
             }
+            
+        }
+
+        private void TxtSpeed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // 텍스트박스 값 변경 처리 작업필요
         }
     }
 }

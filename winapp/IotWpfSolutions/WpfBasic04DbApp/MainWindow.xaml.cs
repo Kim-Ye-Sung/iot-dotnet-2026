@@ -36,8 +36,8 @@ namespace WpfBasic03UiApp
         private void LoadData()
         {
             string query = "SELECT b.book_idx, b.author, b.div_code, d.div_name, b.book_name, b.release_dt, b.isbn, b.price " +
-                           "FROM books AS b JOIN division AS d " +
-                           "ON b.div_code = d.div_code ORDER BY b.book_idx";
+                            " FROM books AS b JOIN division AS d " +
+                            "   ON b.div_code = d.div_code ORDER BY b.book_idx ";
 
             DataTable dt = databaseHelper.Select(query);
             GrdBooks.ItemsSource = dt.DefaultView;

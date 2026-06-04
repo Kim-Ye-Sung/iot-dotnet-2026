@@ -20,9 +20,6 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="기본 데이터바인딩" Grid.Row="0" Grid.Column="0" />
-        <DataGrid x:Name="DgrEmployees" Grid.Row="1" Grid.RowSpan="2" AutoGenerateColumns="True" Margin="5"
-                  IsReadOnly="True" SelectionMode="Single">
-        </DataGrid>
 
         <GroupBox x:Name="GrbInfo" Grid.Column="1" Grid.Row="1" Margin="5" Header="상세정보">
             <Grid>
@@ -35,8 +32,9 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.Row="0" Margin="10" Text="{Binding Speed}"/>
-                <StackPanel Grid.Row="1" Margin="10, 5">
+                <TextBox Grid.Row="0" Margin="10" Text="{Binding Speed}" />
+
+                <StackPanel Grid.Row="1" Margin="10,5">
                     <Border Height="20">
                         <Border.Background>
                             <SolidColorBrush Color="{Binding Color}" />

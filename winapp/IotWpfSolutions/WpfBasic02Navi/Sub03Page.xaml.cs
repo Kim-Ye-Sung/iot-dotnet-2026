@@ -12,10 +12,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfBasic02Navi
-{   
+{
     public class Car
     {
-        public double Speed { get; set; }   
+        public double Speed { get; set; }
         public Color Color { get; set; }
     }
 
@@ -39,15 +39,15 @@ namespace WpfBasic02Navi
             Car car = new Car
             {
                 Speed = 10.0,
-                Color = Colors.Black
+                Color = Colors.Black,
             };
 
             // 데이터컨텍스트
-            //this.DataContext = car;  // 전체 page에 데이터컨텍스트에 car를 지정
-            GrbInfo.DataContext = car;  // 그룹박스 하위에서 car라는 변수의 데이터를 사용할 수 있다
+            //this.DataContext = car; // 전체 page에 데이터컨텍스트에 car를 지정
+            GrbInfo.DataContext = car; // 그룹박스 하위에서 car라는 변수의 데이터를 사용할 수 있다
 
             // WinForms에서 데이터바인딩하던 방식
-            // TxtSpeed.Text = car.Speed.ToString();
+            //TxtSpeed.Text = car.Speed.ToString();
         }
     }
 }
