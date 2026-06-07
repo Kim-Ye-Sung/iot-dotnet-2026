@@ -71,13 +71,13 @@
         <GroupBox Grid.Column="1" Margin="5" Header="책 상세">
             <StackPanel>
                 
-                
+
                 <!-- mah:TextBoxHelper.UseFloatingWatermark="True" -->
                 <mah:NumericUpDown 
                     x:Name="NudBookIdx" Grid.Row="0" Minimum="0" IsReadOnly="True" Margin="5"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="순번"
-                    mah:TextBoxHelper.WatermarkAlignment="Left"          
+                    mah:TextBoxHelper.WatermarkAlignment="Left"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     />
                 <TextBox 
@@ -89,61 +89,54 @@
                     />
                 <ComboBox 
                     x:Name="CboDivCode" Grid.Row="2" Margin="5"
-                    SelectedValuePath="div_code"
+                    SelectedValuePath="div_code"                    
                     DisplayMemberPath="div_name"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="책장르"
                     mah:TextBoxHelper.ClearTextButton="True" 
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    />
+                    mah:TextBoxHelper.UseFloatingWatermark="True"/>
                 <TextBox 
                     x:Name="TxtBookName" Grid.Row="3" Margin="5"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="책제목"
                     mah:TextBoxHelper.ClearTextButton="True"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    />
+                    mah:TextBoxHelper.UseFloatingWatermark="True"/>
                 <DatePicker 
                     x:Name="DtpReleaseDt" Grid.Row="4" Margin="5"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="출판일"
                     mah:TextBoxHelper.ClearTextButton="True"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    />
+                    mah:TextBoxHelper.UseFloatingWatermark="True"/>
                 <TextBox 
                     x:Name="TxtIsbn" Grid.Row="5" Margin="5" 
                     MaxLength="13"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="ISBN"
                     mah:TextBoxHelper.ClearTextButton="True"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    />
+                    mah:TextBoxHelper.UseFloatingWatermark="True"/>
                 <TextBox 
                     x:Name="TxtPrice" Grid.Row="6" Margin="5"
                     mah:TextBoxHelper.AutoWatermark="True"
                     mah:TextBoxHelper.Watermark="책가격"
                     mah:TextBoxHelper.ClearTextButton="True"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    />
+                    mah:TextBoxHelper.UseFloatingWatermark="True"/>
 
                 <StackPanel Grid.Row="7" Orientation="Horizontal">
                     <Button x:Name="BtnNew" Width="100" Content="신규" Margin="5" 
-                            Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}"
-                            Click="BtnNew_Click"/>
+                            Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}" Click="BtnNew_Click"/>
                     <Button x:Name="BtnSave" Width="100" Content="저장" Margin="5"
-                            Style="{StaticResource MahApps.Styles.Button.Dialogs.AccentHighlight}"
-                            Click="BtnSave_Click"/>
+                            Style="{StaticResource MahApps.Styles.Button.Dialogs.AccentHighlight}" Click="BtnSave_Click"/>
                     <Button x:Name="BtnDelete" Width="100" Content="삭제" Margin="5"
                             Padding="5,7"
-                            Style="{StaticResource MahApps.Styles.Button.MetroSquare}"
-                            Click="BtnDelete_Click"/>
+                            Style="{StaticResource MahApps.Styles.Button.MetroSquare}" Click="BtnDelete_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
         <StatusBar Grid.Row="1" Grid.ColumnSpan="2">
-            <StatusBarItem Content="BookRentalShop Books" Margin="5,0" />
-            <Separator Background="white"/>
+            <StatusBarItem Content="BookRentalShop Books v0.2" Margin="5,0" />
+            <Separator Background="White" />
             <StatusBarItem x:Name="SbiResMsg" />
         </StatusBar>
+
     </Grid>
 </mah:MetroWindow>

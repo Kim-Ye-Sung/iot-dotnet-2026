@@ -834,12 +834,12 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 ![alt text](image-29.png)
 
 #### DB연동 객체리스트
-- DataBase와 C#간의 연동에 필요한 객체 및 변수
-    - ConnectionString : DB연결문자열. 종류마다 포맷과 키값이 다름
+- DataBase와 C# 간의 연동에 필요한 객체 및 변수
+    - ConnectionString : DB연결문자열. DB종류마다 포맷과 키값이 다름
 
     ```cs
     // 포트 지정이 필요한 경우 (기본값: 3306)
-    // localhost : 137.0.0.1
+    // localhost : 127.0.0.1
     Server=서버IP;Port=3306;Database=DB이름;Uid=유저명;Pwd=비밀번호;
     // 또는
     Server=서버IP;Database=DB이름;User ID=유저명;Password=비밀번호;Charset=utf8;
@@ -849,11 +849,11 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     - 각 DB별 외부패키지 NuGet에서 설치
     - `Connection` : DB연결객체, 생성시 DB연결문자열 필요
-    - `Command` : 쿼리를 컨트롤 객체, MySqlCommand. 생성시 쿼리문, Connection객체 필요
+    - `Command` : 쿼리를 컨트롤 객체,  MySqlCommand. 생성시 쿼리문, Connection객체 필요
         - ExecuteNonQuery() : INSERT, UPDATE, DELETE 명령 실행
         - ExecuteReader() : SELECT문 실행, 데이터읽어오고 반복문으로 직접 제어
         - ExecuteScalar() : COUNT 함수 처럼 1개 값만 리턴되는 쿼리 실행
-    - `Parameter` : 쿼리 WHERE 절 등에 들어가는 파라미터(@컬럼명) 지정하는 객체
+    - `Parameter` : 쿼리 WHERER 절 등에 들어가는 파라미터(@컬럼명) 지정하는 객체 
     - `DataAdapter` : Command 객체를 자동으로 반복문 처리해주는 객체
         - ExecuteReader()로 생성된 결과는 수동으로 반복문 처리
         - 각 데이터별 조작이 필요할 때 불편함
@@ -868,7 +868,7 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 ```xml
 <ComboBox 
     x:Name="CboDivCode" Grid.Row="2" Margin="5"
-    SelectedValuePath="div_code"
+    SelectedValuePath="div_code"                    
     DisplayMemberPath="div_name"
 ```
 ![alt text](image-31.png)
@@ -883,18 +883,18 @@ if (string.IsNullOrEmpty(author) || string.IsNullOrEmpty(bookName) || string.IsN
 {
     await this.ShowMessageAsync("입력오류", "필수값을 입력하세요");
     return;
-}
-
+}                
+                
 // DateTime releaseDt = DateTime.Parse(DtpReleaseDt.Text);  // 예외발생
-// TryParse(가져올값 변수, out 담을변수) 메서드. 예외발생하지 않음
-if(DateTime.TryParse(DtpReleaseDt.Text, out DateTime releaseDt))
+// TryParse(가져올값변수, out 담을변수) 메서드. 예외발생하지 않음
+if (!DateTime.TryParse(DtpReleaseDt.Text, out DateTime releaseDt))
 {
     await this.ShowMessageAsync("입력오류", "날짜형식이 올바르지 않습니다");
     return;
 }
 
 // 가격도 TryParse
-if(!int.TryParse(TxtPrice.Text, out int price))
+if (!int.TryParse(TxtPrice.Text, out int price))
 {
     await this.ShowMessageAsync("입력오류", "가격은 숫자로 입력하세요");
     return;
@@ -908,12 +908,10 @@ if(!int.TryParse(TxtPrice.Text, out int price))
 - [xaml](./winapp/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml)
 - [소스](./winapp/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml.cs)
 
-
-## 데스크톱앱 강의 진행사항
+## 데스트톱앱 강의 진행사항
 
 ### 리소스 디자인 추가
 #### Presenter (나중에)
-
 - 컨트롤의 실제 내용을 화면에 표시하는 자리
 
 ### 키오스크 앱

@@ -32,7 +32,7 @@ namespace WpfBasic04DbApp
             // 3, SqlDataAdapter 생성 : 매우 간단하게 데이터가져올수 있는 방법
             // 또는, SqlDataReader 생성 : 직접 데이터를 핸들링
             using MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-
+                        
             // 4, 공통 DataTable 객체 : 어댑터 객체내 데이터를 복사
             DataTable dt = new DataTable();
             adapter.Fill(dt);
@@ -64,10 +64,8 @@ namespace WpfBasic04DbApp
 
                 using MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                if(parameters != null)
-                {
+                if (parameters != null) 
                     cmd.Parameters.AddRange(parameters);
-                }
                 
                 return cmd.ExecuteNonQuery();  // INSERT, UPDATE, DELETE 쿼리를 실행
             }
