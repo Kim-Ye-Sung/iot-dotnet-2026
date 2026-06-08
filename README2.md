@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/c92ec74e-cf43-4070-88a7-2b13d50ab031
-
 # 2026 닷넷 개발자 데스크톱 개발
 
 ## WPF 실습
