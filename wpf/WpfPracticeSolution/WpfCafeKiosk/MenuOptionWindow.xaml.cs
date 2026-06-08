@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,16 +20,16 @@ namespace WpfCafeKiosk
         private string menuName;
         private int price;
         private string imagePath;
-        private int qty = 1;    // Quentity
+        private int qty = 1;  // Quentity
 
         public MenuOptionWindow(string menuName, int price, string imagePath)
         {
-            InitializeComponent();
+            InitializeComponent(); 
 
             this.menuName = menuName;
             this.price = price;
             this.imagePath = imagePath;
-            
+
             TxtMenuName.Text = menuName;
             TxtPrice.Text = $"{price:N0}원";
 

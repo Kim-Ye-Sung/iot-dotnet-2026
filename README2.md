@@ -5,8 +5,9 @@
 ### 카페 키오스크 개발
 
 - 사용 스펙
+
   - WPF (.NET 10.0)
-  - MaterialDesign (MaterialDesignInXamilToolkit)
+  - MaterialDesign (MaterialDesignThemes)
   - MySQL + DBeaver
 
 #### 프로젝트 생성
@@ -14,8 +15,7 @@
 - WpfCafeKiosk
 - NuGet Package, MaterialDesignThemes, MySQLConnector 설치
 - MahApps.Metro.IconPacks 추가 설치
-
-![alt text](image-33.png)
+- ![alt_text](assets/20260608_101154_image.png)
 
 #### 프로젝트 구성
 
@@ -30,20 +30,19 @@
 
 #### MaterialDesign 적용
 
-- App.xaml에 리소스딕셔너리 적용
+* App.xaml에 리소스딕셔너리 적용
 
 #### MySQL DB, Table 생성
 
-cafekiosk 데이터베이스 생성
-
-menu 테이블 생성
+* cafekiosk 데이터베이스 생성
+* menu 테이블 생성
 
 ```sql
 CREATE TABLE menu
 (
-    menu_id INT PRIMARY KEY AUTO_INCREMENT,
-    menu_name VARCHAR(100) NOT NULL,
-    price INT NOT NULL,
+    menu_id INT PRIMARY KEY AUTO_INCREMENT,  
+    menu_name VARCHAR(100) NOT NULL,  
+    price INT NOT NULL,  
     image_path VARCHAR(255),
     category VARCHAR(20),
     is_sale CHAR(1) DEFAULT 'Y'
@@ -52,8 +51,8 @@ CREATE TABLE menu
 
 #### 모델 클래스
 
-- MenuItem - DB menu테이블과 매핑
-- OrederItem - 주문리스트 저장
+* MenuItem - DB menu테이블과 매핑
+* OrderItem - 주문리스트 저장
 
 #### 이미지 작업
 
@@ -61,18 +60,18 @@ CREATE TABLE menu
 - 일부 편집
 - Images 폴더에 붙여넣기
 
-![alt text](image-35.png)
+![alt_text](assets/20260608_155010_image.png)
 
-#### UI작업 및 기본 이벤트
+#### MainWindow UI 작업 및 기본 이벤트
 
-![alt text](image-34.png)
+![alt_text](assets/20260608_153000_image.png)
 
 #### 메뉴 옵션 팝업창 작업
 
-![alt text](image-36.png)
+![alt_text](assets/20260608_170530_image.png)
 
 #### 기본 동작 이벤트 구현
 
-https://github.com/user-attachments/assets/8cec9d84-b169-4002-9b5f-c9bb1e6646da
+https://github.com/user-attachments/assets/3fab497c-5e01-4800-bcfa-f0301174ea63
 
 ### OpenAPI 연동앱 개발
