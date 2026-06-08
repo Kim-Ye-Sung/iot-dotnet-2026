@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/c92ec74e-cf43-4070-88a7-2b13d50ab031
+
 # 2026 닷넷 개발자 데스크톱 개발
 
 ## WPF 실습
@@ -73,5 +77,6 @@ CREATE TABLE menu
 
 #### 기본 동작 이벤트 구현
 
+https://github.com/user-attachments/assets/8cec9d84-b169-4002-9b5f-c9bb1e6646da
 
 ### OpenAPI 연동앱 개발
