@@ -36,6 +36,7 @@
 
 * cafekiosk 데이터베이스 생성
 * menu 테이블 생성
+* orders, order_detail 테이블 생성
 
 ```sql
 CREATE TABLE menu
@@ -47,7 +48,31 @@ CREATE TABLE menu
     category VARCHAR(20),
     is_sale CHAR(1) DEFAULT 'Y'
 );
+
+CREATE TABLE orders
+(
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    total_count INT NOT NULL,
+    total_amount INT NOT NULL
+);
+
+CREATE TABLE order_detail
+(
+    detail_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    menu_id INT NOT NULL,
+    menu_name VARCHAR(100) NOT NULL,
+    price INT NOT NULL,
+    count INT NOT NULL,
+    total_price INT NOT NULL,
+    CONSTRAINT fk_order_detail_orders
+        FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+);
 ```
+
+![alt_text](assets/20260609_170401_image.png)
 
 #### 모델 클래스
 
@@ -74,4 +99,34 @@ CREATE TABLE menu
 
 https://github.com/user-attachments/assets/3fab497c-5e01-4800-bcfa-f0301174ea63
 
+### 카페 키오스크 구현 리스트
+
+- [X] 옵션 팝업창에서 수량 선택한 내용 주문담기 버튼 기능구현
+- [X] 키오스크 리스트뷰 음료 리스트업
+- [X] 선택한 상품, 결제버튼 비용, 갯수연동
+- [X] 전체 삭제 기능
+- [X] 남은 시간 완료 후 전체내용 초기화
+- [X] 홈 버튼 클릭 초기화
+- [X] 메인창에서 옵션창으로 MenuId 전달
+- [ ] DB연동!! 메뉴 SELECT /주문내역 INSERT
+- [X] 메뉴 동적 바인딩!!
+
+#### 옵션창 주문내역 확인
+
+![](assets/20260609_094915_image.png)
+
+- `Tag={Binding}` - 객체 자체의미, OrderItem 객체 자체. 하위에서 MenuName, Count 등 사용 가능
+- Margin, Padding 위치 순서 - Left, Top, Right, Bottom / Left&Right, Top&Bottom 순서
+- CornerRadius 위치 순서 - TopLeft, TopRight, BottomRight, BottomLeft / TopLeft&BottomRight, TopRight&BottomLeft 순서
+
+#### 실행결과
+
+https://github.com/user-attachments/assets/1003c297-420b-46f2-8b83-9a4a416dee7e
+
+
+
 ### OpenAPI 연동앱 개발
+
+### SmartHome 솔루션
+
+## Unity 실습
