@@ -556,7 +556,7 @@ IoT 개발자 닷넷 리포지토리(기본, 중급, 응용, 프로젝트)
             <Grid>
                 <Rectangle RadiusX="12" RadiusY="12" 
                            Fill="#25A3FB" Stroke="DarkBlue" StrokeThickness="4" />
-                <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="20" FontWeight="ExtraBold"                             
+                <Label Content="{TemplateBinding Content}" Foreground="White" FontSize="20" FontWeight="ExtraBold"                           
                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </ControlTemplate>
@@ -892,7 +892,7 @@ HorizontalAlignment="Center" VerticalAlignment="Center"/>
 ```xml
 <ComboBox 
     x:Name="CboDivCode" Grid.Row="2" Margin="5"
-    SelectedValuePath="div_code"              
+    SelectedValuePath="div_code"            
     DisplayMemberPath="div_name"
 ```
 
@@ -909,8 +909,8 @@ if (string.IsNullOrEmpty(author) || string.IsNullOrEmpty(bookName) || string.IsN
 {
     await this.ShowMessageAsync("입력오류", "필수값을 입력하세요");
     return;
-}          
-          
+}        
+        
 // DateTime releaseDt = DateTime.Parse(DtpReleaseDt.Text);  // 예외발생
 // TryParse(가져올값변수, out 담을변수) 메서드. 예외발생하지 않음
 if (!DateTime.TryParse(DtpReleaseDt.Text, out DateTime releaseDt))
@@ -934,20 +934,13 @@ if (!int.TryParse(TxtPrice.Text, out int price))
 - [xaml](./wpf/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml)
 - [소스](./wpf/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml.cs)
 
-
 > [다음](./README2.md)
-
 
 ### 리소스 디자인 추가
 
 #### Presenter (나중에)
 
 - 컨트롤의 실제 내용을 화면에 표시하는 자리
-
-### 키오스크 앱
-
-- 결재이전까지 동작하는 버전
-- WPF를 사용해서 구현
 
 ### OpenAPI연동 앱
 

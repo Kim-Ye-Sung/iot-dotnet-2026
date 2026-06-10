@@ -108,7 +108,7 @@ https://github.com/user-attachments/assets/3fab497c-5e01-4800-bcfa-f0301174ea63
 - [X] 남은 시간 완료 후 전체내용 초기화
 - [X] 홈 버튼 클릭 초기화
 - [X] 메인창에서 옵션창으로 MenuId 전달
-- [ ] DB연동!! 메뉴 SELECT /주문내역 INSERT
+- [X] DB연동!! 메뉴 SELECT /주문내역 INSERT
 - [X] 메뉴 동적 바인딩!!
 - [ ] DB저장 후 신용카드 결제 팝업(더미)
 
@@ -127,13 +127,19 @@ https://github.com/user-attachments/assets/1003c297-420b-46f2-8b83-9a4a416dee7e
 #### 로그확인 방법
 
 - 프로젝트 속성 > 출력 유형
+
+![](assets/20260610_094902_image.png)
+
 - Windows 애플리케이션 -> 콘솔 애플리케이션 변경
 - MessageBox.Show() 대신 Console.WriteLine() 메서드 변경
 - 실행로그 확인
 
+![](assets/20260610_095013_image.png)
+
+
 #### DB 주문내역 등록
 
-- DatabaseHelper에 INSERT 처리 메서드 생성
+- DabaseHelper에 INSERT 처리 메서드 생성
 - MainWindow.xaml.cs에 저장쿼리 실행 메서드 생성
 - BtnPay_Click 이벤트핸들러에 저장 메서드 추가
 
@@ -143,9 +149,9 @@ https://github.com/user-attachments/assets/1003c297-420b-46f2-8b83-9a4a416dee7e
 - 구성관리자 Debug -> Release로 변경 빌드
 - 배포...
 
-
 #### 전체 실행결과
 
+https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 
 ### OpenAPI 연동앱 개발
 

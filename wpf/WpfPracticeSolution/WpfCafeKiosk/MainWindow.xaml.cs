@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using WpfCafeKiosk.Common;
 using WpfCafeKiosk.Models;
+using static MaterialDesignThemes.Wpf.Theme.ToolBar;
 
 namespace WpfCafeKiosk
 {
@@ -48,8 +49,7 @@ namespace WpfCafeKiosk
 
             LoadMenus();
 
-            timer = new DispatcherTimer
-            {
+            timer = new DispatcherTimer {
                 Interval = TimeSpan.FromSeconds(1),  // 1초마다 이벤트 발생
                 IsEnabled = true
             };
@@ -67,9 +67,9 @@ namespace WpfCafeKiosk
             MenuPanel.Children.Clear();  // 디자인용 메뉴 클리어
 
             // 쿼리는 여러줄문자열일때 앞뒤 공백을 추가 반드시, Syntax Error
-            string query = " SELECT menu_id, menu_name, price, image_path, category, is_sale " +
-                           "   FROM menu " +
-                           "  WHERE is_sale = 'Y' " +
+            string query = " SELECT menu_id, menu_name, price, image_path, category, is_sale "+
+                           "   FROM menu "+
+                           "  WHERE is_sale = 'Y' "+
                            "  ORDER BY menu_id ";
 
             try
@@ -94,14 +94,14 @@ namespace WpfCafeKiosk
                     MenuPanel.Children.Add(btn);
                 }
 
-                Console.WriteLine($"DB 메뉴 로딩완료");
+                Console.WriteLine($"DB 메뉴 로딩완료!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-
+            
         }
 
         // 메뉴버튼 생성 메서드
@@ -123,11 +123,10 @@ namespace WpfCafeKiosk
             btn.Click += Menu_Click;  // 이전에 만든 Menu_Click 이벤트핸들러를 코딩으로 새로만드는 버튼 이벤트로 연결
 
             /// 버튼 디자인 코딩 구현 시작
-            Card card = new Card
-            {
+            Card card = new Card { 
                 UniformCornerRadius = 15,
                 ClipToBounds = true,
-                Padding = new Thickness(0),
+                Padding = new Thickness(0),                
             };
 
             Grid grid = new Grid();
@@ -140,7 +139,7 @@ namespace WpfCafeKiosk
             }
             catch
             {
-                img.Source = null;
+                img.Source = null;                       
             }
 
             // 음료명, 가격 주변에 들어갈 Border
@@ -158,8 +157,7 @@ namespace WpfCafeKiosk
                 Margin = new Thickness(0, 0, 0, 5)
             };
 
-            TextBlock txtMenuName = new TextBlock
-            {
+            TextBlock txtMenuName = new TextBlock {
                 Text = menuItem.MenuName,
                 FontSize = 14,
                 FontWeight = FontWeights.Bold,
@@ -227,7 +225,7 @@ namespace WpfCafeKiosk
             //string imagePath = tag[2];  // tag를 메인윈도우에서 잘라서 변수들을 파라미터로 보내면 변수개수에 따라서 생성자 변경필요
             string strTag = btn.Tag.ToString();
 
-            //MessageBox.Show($"{price}", $"{name}");
+            // MessageBox.Show($"{price}", $"{name}");
             Console.WriteLine($"{strTag} 메뉴 클릭!");
             //MenuOptionWindow win = new MenuOptionWindow(menuName, price, imagePath);
             MenuOptionWindow win = new MenuOptionWindow(strTag);
@@ -242,7 +240,7 @@ namespace WpfCafeKiosk
                 //OrderItem item = win.SelectedOrder;
                 // 주문 리스트뷰에 추가
                 //MessageBox.Show($"{item.MenuName} {item.Count}개 담기! {item.TotalPrice:N0}원");
-                Console.WriteLine($"{win.SelectedOrder.MenuName} {win.SelectedOrder.Count} 개 담기");
+                Console.WriteLine($"{win.SelectedOrder.MenuName} {win.SelectedOrder.Count}개 담기! {win.SelectedOrder.TotalPrice:N0}원");
                 orders.Add(win.SelectedOrder);
                 RefreshOrderSummary();
                 remainSeconds = 60;
@@ -294,6 +292,7 @@ namespace WpfCafeKiosk
             RefreshOrderSummary();
         }
 
+
         // 주문, 주문상세 DB 저장메서드
         private void SaveOrders()
         {
@@ -301,48 +300,47 @@ namespace WpfCafeKiosk
             int totalAmount = orders.Sum(x => x.TotalPrice);
 
             // @ 여러줄문자열 키워드
-            // orders 테이블 INSERT하고 자동생성된 order_id 값을 리턴
+            // orders 테이블 INSERT하고 자동생성된 order_id값을 리턴
             string orderQuery = $@"INSERT INTO orders
-                            (
-                               total_count,
-                               total_amount
-                            )
-                            VALUES 
-                            (
-                               {totalCount}, 
-                               {totalAmount}
-                            );
+                                    (
+	                                    total_count,
+	                                    total_amount
+                                    )
+                                    VALUES 
+                                    (
+	                                    {totalCount}, 
+	                                    {totalAmount}
+                                    ); 
 
-                            SELECT LAST_INSERT_ID();";
+                                    SELECT LAST_INSERT_ID();";
 
             int orderID = db.ExecuteScalar(orderQuery);
-            
+
             // order_detail 테이블에 주문상세 INSERT
-            foreach (OrderItem item in orders)
-            {
+            foreach (OrderItem item in orders) {
                 string orderDetailQuery = $@"INSERT INTO order_detail
                                             (
-                                               order_id, 
-                                               menu_id, 
-                                               menu_name, 
-                                               price, 
-                                               count, 
-                                               total_price
+	                                            order_id, 
+	                                            menu_id, 
+	                                            menu_name, 
+	                                            price, 
+	                                            count, 
+	                                            total_price
                                             )
                                             VALUES
-                                            (   
-                                               {orderID}, 
-                                               {item.MenuId}, 
-                                               '{item.MenuName}', 
-                                               {item.Price}, 
-                                               {item.Count}, 
-                                               {item.TotalPrice}
+                                            (	
+	                                            {orderID}, 
+	                                            {item.MenuId}, 
+	                                            '{item.MenuName}', 
+	                                            {item.Price}, 
+	                                            {item.Count}, 
+	                                            {item.TotalPrice}
                                             )";
 
+                db.ExecuteNonQuery(orderDetailQuery);
             }
-
-            db.ExecuteNonScalar(orderQuery);
         }
+
 
         // 결제버튼
         private void BtnPay_Click(object sender, RoutedEventArgs e)
@@ -362,11 +360,12 @@ namespace WpfCafeKiosk
 
             if (result == true)
             {
+                // DB저장
                 SaveOrders();
                 Console.WriteLine("주문 DB저장 완료!");
 
                 // TODO : 카드결제창 팝업
-            }
+            } 
             else
             {
                 timer.Start();
