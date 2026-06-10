@@ -1,6 +1,6 @@
 # 2026 닷넷 개발자 데스크톱 개발
 
-## 1.WPF 실습
+## 1. WPF 실습
 
 ### 1.1. 카페 키오스크 개발
 
@@ -158,59 +158,81 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 
 #### OpenAPI 개요
 
-- 웹 서비스 종류-
+- 웹 서비스 종류
+
   - 웹 사이트 - 디자인 적용된 프론트엔드와 데이터를 핸들링하는 백엔드 전부 서비스
   - OpenAPI(RestAPI) - 프론트엔드 없이 데이터만 제공하는 서비스
 - OpenAPI 활용처
+
   - 모바일 앱 - 버스도착 앱, 날씨조회 앱, 영화검색 앱...
   - IoT 데이터 연동 - 데이터 전달 인터페이스
   - SNS 연동
   - 결제시스템
 - [공공데이터 포털](https://data.go.kr)
+
   - 국가 공공데이터 사용 창구
-  - 회원가입 후, 개인 API인증 키 발급
+  - 회원가입 후, 개인 API인증키 발급
   - 데이터 찾기, 활용신청
 
 #### 공공데이터 사용법
 
 - 활용신청 현황
+
+  ![](assets/20260610_114336_image.png)
 - 참고문서 확인 - json을 서비스 지원 확인
-- URL 사용할 일반인증키(
-- 크롬 브라우저 사용시 - Chrom 웹스토어 > SevenJSON Viewer
+
+  ![](assets/20260610_114815_image.png)
+- URL 사용할 일반인증키(Encoding) ServiceKey에 사용
+
+  ![](assets/20260610_115131_image.png)
+- 크롬 브라우저 사용시 - Chrom 웹스토어 > `Seven JSON Viewer` 검색, 설치
+
+  ![](assets/20260610_115712_image.png)
 - 서비스URL 구조
+
   - 기본 URL - https://apis.data.go.kr/6260000/FestivalService/getFestivalKr
-  - Get Method URL - 원하는 서비스를 요청하는 URL값, `Key=Value`쌍. 시작은 `?`, 구분자는 `&`
+  - **Get Method URL** - 원하는 서비스를 요청하는 URL값, `Key=Value`쌍. 시작은 `?`, 구분자는 `&`
     - ?serviceKey=서비스키 - 데이터포털에서 할당받은 서비스키
     - &pageNo=1 - 요청할 페이지 번호
     - &numOfRows=10 - 한페이지당 데이터 수
     - &resultType=json - 결과타입(xml, json)
 - json 타입 데이터 - WPF앱에서 핸들링
+
   - DB데이터 연동방법과 유사
 
 
 #### 부산축제 정보 앱
 
-- 공공데이터 포털 > 부산 축제정보 서비스
-- WPF 앱
-    - Newtonsoft.Json
-    - MahApps.Metro
-    - MahApps.Metro.IconPacks
-    - CefSharp.Wpf.NETCore - 웹브라우저 패키지(구글맵 표현)
-    - NLog - 로그 작성 패키지
+- 공공데이터 포털 > 부산 축제정보 서비스 신청
+- WPF 앱 패키지 설치
+  - Newtonsoft.Json
+  - MahApps.Metro
+  - MahApps.Metro.IconPacks
+  - CefSharp.Wpf.NETCore - 웹브라우저 패키지(구글맵 표현)
+  - NLog - 로그 작성 패키지
 
 - UI 디자인
 - 서비스 클래스, 데이터 모델 클래스
 
 - 구성
-    - WpfBusanFestivalApp
-        - Models
-            - 관련 클래스
-        - Service
-            - 관련 클래스
-        - MainWindow.xaml
-        - MapWindow.xaml
+  - WpfBusanFestivalApp
+    - Models
+      - 관련 클래스
+    - Services
+      - 관련 클래스
+    - MainWindow.xaml
+    - MapWindow.xaml
 
-![alt text](image-33.png)
+- 구성관리자 플랫폼
+  - Any CPU - 현재 OS 확인해서 알맞은 플랫폼 사용
+  - ARM - 임베디드 저전력장치 CPU 아키텍처. Advanced RISC Machines 약자
+    - ARM32 - 32비트(Integer를 표현크기) OS동작 아키텍처
+    - ARM64 - 64비트 OS 아키텍처
+  - AMD - ARM 비교하기위해서 사용하는 OS 아키텍처. Intel CPU동일한 의미
+    - x86 - 32비트 OS
+    - `x64` - 64비트 OS. 현재 윈도우 기본
+
+  ![alt text](image-33.png)
 
 #### JSON
 - JavaScript Object Notation 약자
@@ -223,12 +245,12 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
     "제목" : "부산불꽃축제",
     "날짜" : "2026-10-08",
     "장소" : "부산광역시",
-    "입장료" : 5000,
+    "입장료" : 5000
     "진행여부" : true,
-    "리스트" : {1,2,3,4, ...},
+    "리스트" : [ 1, 2, 3, 4, ... ],
     "이미지" : "x09xFF...",
     {
-      // 하위데이터    
+      // 하위데이터 
     }
   }
   ```
@@ -244,6 +266,7 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
   - NumericUpdown 컨트롤 prefix(mah:) 추가 필요
 
 #### 데이터포털 서비스키 설정
+
 - 설정 방법
   1. 제공키 일반 복사로 공개
   2. 암호화로 저장, 복호화 사용
@@ -261,7 +284,6 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
   ```
 
 - 레지스트리편집기에서 등록한 서비스키 확인
-
   ![alt text](image-34.png)
 
 - 닷넷 User Secrets - 프로젝트 위치에서 실행
@@ -270,7 +292,7 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
   > dotnet user-secrets init
   # 키 등록
   > dotnet user-secrets set "FestivalApiKey" "발급받은키"
-  #키 확인
+  # 키 확인
   > dotnet user-secrets list
   ```
 
@@ -283,13 +305,12 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 - [ ] NLog 로그처리
 - [ ] MahApps.Metro.IconPacks 사용
 - [ ] 비동기 메서드 수정
-- [ ] 페이지번호, 결과수 파라미터 사용하기 
+- [ ] 페이지번호, 결과수 파라미터 사용하기
 - [ ] 검색버튼 기능
 - [ ] 데이터그리드 포커스 색상 반전
 - [ ] 데이터그리드 레코드 클릭시 상세 팝업
 - [ ] 데이터그리드 레코드 더블클릭시 지도 팝업
-- [ ] 기타 예외처리 
-
+- [ ] 기타 예외처리
 
 ### SmartHome 솔루션
 

@@ -29,7 +29,7 @@ namespace WpfBusanFestivalApp
             //Console.WriteLine(key);
 
             // Api서비스 생성
-            FestivalApiService service = new FestivalApiService();
+            FestivalApiService service = new FestivalApiService();            
             var festivals = await service.GetFestivalsAsync();
             DgrFestival.ItemsSource = festivals;
         }
