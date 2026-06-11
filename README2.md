@@ -313,6 +313,27 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 - [ ] 상세정보 홈페이지 띄우기
 - [x] 기타 예외처리
 
+#### C# 코딩방식 변경
+- 좀더 효율적인 코딩방식 채택
+```cs
+// 1번 예전 C#방식
+if(response != null &&
+   response.FestivalData != null &&
+   response.FestivalData.items != null)
+{
+  return response.FestivalData.Items;
+}
+else
+{
+  return new ObservableCollection<FestivalItem>(); // 빈 리스트
+}
+
+// 2번 좀더 최근 C# 방식
+return response?.FestivalData?.Items?? new ObservableCollection<FestivalItem>();
+```
+
+- ?. response 가 null이면 
+
 #### NuGet 패키지
 
 - 느낌표 아이콘이 뜨면 패키지 사용이 거의 불가
@@ -379,6 +400,66 @@ https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 
 - CefSharp.WPF 라이브러리 사용
 
+#### 추가 개발건
+
+- [ ] (하) 결과수에서 값을 변경하고 엔터키를 누르면 바로 검색진행
+- [ ] (하) 전체 데이터수를 넘어서는 페이지번호, 결과수 제약
+- [ ] (하) 웹사이트 링크대신 아이콘버튼으로 변경
+- [ ] (하) MIDDLE_SIZE_RM1 장애인 정보 표현
+- [ ] (중) HTMl 삭제 대신 CefSharp.WPF 브라우저로 HTML 렌더링 표현
+- [ ] (상) 유튜브 검색결과와 연동, 링크누르면 유튜브 실행하게
+- [ ] (상) 구글맵 API 사용해서 구글맵 표현
+
+#### 데이터포털 부산 API 활용방법
+- 축제정보와 거의 동일한 서비스
+  - 부산광역시_부산맛집정보 서비스
+  - 부산광역시_부산명소정보 서비스
+  - 부산광역시_부산테마여행정보 서비스
+  - 부산광역시_부산도보여행정보 서비스
+  - 부산광역시_부산쇼핑정보 서비스
+
+- 유사한 서비스
+  - 부산광역시_공연장 목록 서비스
+  - 부산광역시_갈맷길 코스 정보 서비스
+  - 부산광역시_구군 모범음식점 현황
+
+- 관광공사에서 API를 신규발급 서비스
+  - 부산 음식테마거리
+  - 부산 7beach 음식관광
+
 ### SmartHome 솔루션
+
+#### MQTT
+
+- Message Queuing Telemetry Transport 프로토콜 명칭
+- IoT 장치간에 데이터를 주고받을 수 있도록 개발
+- ISO/IEC 20922 국제표준
+- 발행-구독(Publish-Subscribe) 기반 - ROS와 유사
+  - Apache Kafka : Java, Spring Boot
+  - ROS2 DDS : 로봇
+  - MQTT : IoT, 스마트팩토리
+  - RabbitMQ : 기업메시징
+  - SignalR : 실시간웹
+  - WebSocket 브로드캐스트 : 실시간웹
+- 소켓통신, TCP/IP 기반
+
+- MQTT 동작방식
+
+- WPF SmartHome 프로젝트
+
+- Dummy Sensing Data 생성, 송신 앱 구현
+- MQTT 브로커 설치 및 설정
+- SmartHome 모니터링 앱 구현
+
+#### MQTT 브로커
+
+#### Dummy Simulator앱
+
+#### SmartHome 모니터링 앱
+
+### MVVM은 나중에
+
+#### Dummy IoT Data 생성
+- 1초마다 DB에 저장
 
 ## Unity 실습

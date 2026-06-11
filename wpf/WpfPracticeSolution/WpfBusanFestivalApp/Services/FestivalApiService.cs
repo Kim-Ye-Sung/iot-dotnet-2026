@@ -50,6 +50,11 @@ namespace WpfBusanFestivalApp.Services
                 FestivalReponse? response = JsonConvert.DeserializeObject<FestivalReponse>(json);
 
                 return response.FestivalData.Items;
+
+                // 1번 예전 C#방식
+                //if(response != null &&
+                //   response.FestivalData != null &&
+                //   response.)
             }
             catch (Exception ex)
             {
