@@ -942,22 +942,9 @@ if (!int.TryParse(TxtPrice.Text, out int price))
 
 - 컨트롤의 실제 내용을 화면에 표시하는 자리
 
-### OpenAPI연동 앱
-
-- 미세먼지 모니터링앱
-- 국가교통정보 CCTV뷰 앱
-- IoT 모니터링앱
-
-### 스마트홈 앱
-
-- ??
 
 ### 라이브러리 만들기
 
 ### Essential Pathway 학습
-
-### 게임 프로젝트
-
-- ??
 
 ### 유니티 디지털트윈

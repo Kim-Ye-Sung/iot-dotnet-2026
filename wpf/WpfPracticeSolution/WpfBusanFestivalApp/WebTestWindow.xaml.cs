@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CefSharp.Wpf;
 
 namespace WpfBusanFestivalApp
 {
@@ -24,7 +25,7 @@ namespace WpfBusanFestivalApp
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string url = "https://www.naver.com";
+            string url = "https://www.google.com";
 
             WebBrowser.Address = url;
         }

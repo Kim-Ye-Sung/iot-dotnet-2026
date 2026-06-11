@@ -6,9 +6,9 @@
         xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:local="clr-namespace:WpfBusanFestivalApp"
         mc:Ignorable="d"
-        Title="WebTestWindow" Height="300" Width="500">
+        Title="WebTestWindow" Height="300" Width="500" Loaded="Window_Loaded">
     <Grid>
-        <!--<WebBrowser x:Name="WebBrowser2" load/>-->
-        <cefSharp:ChromiumWebBrowser x:Name="WebBrowser" Margin ="10"/>
+        <!--<WebBrowser x:Name="WebBrowser2" Margin="10"/>-->
+        <cefSharp:ChromiumWebBrowser x:Name="WebBrowser" Margin="10" />
     </Grid>
 </Window>

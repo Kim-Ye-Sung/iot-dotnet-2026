@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using NLog;
+using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,7 @@ namespace WpfBusanFestivalApp
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        // NLog 
+        // NLog 기본 객체 생성방법
         //private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         private readonly FestivalApiService service;
@@ -33,20 +34,19 @@ namespace WpfBusanFestivalApp
 
             service = new FestivalApiService();
             // logger 에서 쓸 수 있는 메서드 Info(), Trace(), Debug(), Warn(), Error()
-            Common.logger.Info("부산페스티벌정보앱 시작.");
+            Common.logger.Info("부산 페스티벌정보앱 시작.");
         }
 
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Common.logger.Info("부산페스티벌정보앱 로드 시작.");
+            Common.logger.Info("부산 페스티벌정보앱 로드 시작");
             //string? key = Environment.GetEnvironmentVariable("BUSAN_FESTIVAL_API_KEY");
             //Console.WriteLine(key);
 
-            //// Api서비스 생성
+            // Api서비스 생성
             //FestivalApiService service = new FestivalApiService();            
             //var festivals = await service.GetFestivalsAsync();
             //DgrFestival.ItemsSource = festivals;
-
             await SearchFestivalAsync();
 
             Common.logger.Info("공공데이터 API 데이터 로드 완료");
@@ -55,14 +55,19 @@ namespace WpfBusanFestivalApp
         // 검색
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
+            //WebTestWindow win = new WebTestWindow();
+            //win.Owner = this;
+            //win.ShowDialog();
+
             await SearchFestivalAsync();
         }
 
+        // 검색기능 처리
         private async Task SearchFestivalAsync()
         {
             try
             {
-                BtnSearch.IsEnabled = false;    // 검색이 완료될때까지 비활성화. 다시 못누르게
+                BtnSearch.IsEnabled = false;  // 검색이 완료될때까지 비활성화. 다시 못누르게
 
                 // NumPageNo.Value == Null ? 1 : NumPageNo.Value
                 int pageNo = Convert.ToInt32(NumPageNo.Value ?? 1);
@@ -72,11 +77,15 @@ namespace WpfBusanFestivalApp
 
                 DgrFestival.ItemsSource = festival;
 
-                Common.logger.Info($"Page : {pageNo}, Records : {numOfRows} 로드 완료!");
+                Common.logger.Info($"Page : {pageNo}, Records : {festival.Count} 로드 완료!");
+
+                SbiStatus.Text = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {pageNo} 페이지 {festival.Count} 건 로드 완료";
             }
             catch (Exception ex)
             {
                 Common.logger.Error($"데이터 로드 실패 SearchFestivalAsync() : {ex.Message}");
+
+                SbiStatus.Text = $"로드 실패!!";
             }
             finally
             {
@@ -86,7 +95,7 @@ namespace WpfBusanFestivalApp
 
         private void DgrFestival_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(DgrFestival.SelectedItems.Count ==0)
+            if (DgrFestival.SelectedItems.Count == 0)
             {
                 return;
             }
@@ -96,8 +105,7 @@ namespace WpfBusanFestivalApp
             FestivalDetailWindow win = new FestivalDetailWindow(detailItem);
             win.Owner = this;
 
-            win.ShowDialog();   // 부모창으로 데이터를 넘길게 아니면 Result true/false
-            
+            win.ShowDialog();  // 부모창으로 데이터를 넘길게 아니면 Result true/false
         }
     }
 }
