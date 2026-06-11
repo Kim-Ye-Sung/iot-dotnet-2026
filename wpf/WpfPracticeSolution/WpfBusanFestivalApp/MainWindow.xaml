@@ -10,6 +10,11 @@
     mc:Ignorable="d"
     Title="부산 축제정보 V1.0" Height="600" Width="1000"
     WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <iconPacks:PackIconMaterialDesign Kind="FestivalOutline" Foreground="White" Margin="10, 7, 0, 0"/>
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>
     <DockPanel Background="#F7F7F7">
 
         <!-- 하단 상태바 -->
@@ -77,11 +82,15 @@
                     <Button x:Name="BtnSearch"
                             Width="75"
                             Height="38"
-                            Content="검색"                            
                             Foreground="White"                            
                             FontWeight="Bold"
                             Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}"
-                            />
+                            Click="BtnSearch_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconBoxIcons Kind="RegularSearchAlt" />
+                            <TextBlock Text="검색"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
 
@@ -97,6 +106,7 @@
                       SelectionMode="Single"
                       SelectionUnit="FullRow"
                       IsReadOnly="True"
+                      MouseDoubleClick="DgrFestival_MouseDoubleClick"
                       >
 
                 <DataGrid.Columns>

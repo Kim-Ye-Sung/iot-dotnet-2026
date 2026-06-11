@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
+using WpfBusanFestivalApp.Helpers;
 using WpfBusanFestivalApp.Models;
 
 namespace WpfBusanFestivalApp.Services
@@ -14,9 +16,12 @@ namespace WpfBusanFestivalApp.Services
         //private readonly string ServiceKey = "....XlJz%2B%2FK8A%3D%3D";        
         private string? ServiceKey { get; set; }
 
-        public FestivalApiService() { 
+        public FestivalApiService()
+        {
 
             ServiceKey = Environment.GetEnvironmentVariable("BUSAN_FESTIVAL_API_KEY");
+
+
         }
 
         // OpenAPI를 네트워크 요청시 응답이 늦으면 UI스레드 충돌때문에 응답없음 뜰 수 있음
@@ -24,6 +29,7 @@ namespace WpfBusanFestivalApp.Services
         {
             if (ServiceKey == null)
             {
+                Common.logger.Warn("공공데이터 포털 API가 없습니다.");
                 return null;
             }
 
@@ -33,15 +39,23 @@ namespace WpfBusanFestivalApp.Services
                                 $"&numOfRows={numOfRows}" +
                                 $"&resultType=json";
 
-            using HttpClient client = new HttpClient();
+            try
+            {
+                using HttpClient client = new HttpClient();
 
-            string json = await client.GetStringAsync(serviceUrl);
+                string json = await client.GetStringAsync(serviceUrl);
 
-            // 데이터 직렬화(Serialization)로 네트워크 다운로드 
-            // 역직렬화로 데이터 변환 
-            FestivalReponse? response = JsonConvert.DeserializeObject<FestivalReponse>(json);
+                // 데이터 직렬화(Serialization)로 네트워크 다운로드 
+                // 역직렬화로 데이터 변환 
+                FestivalReponse? response = JsonConvert.DeserializeObject<FestivalReponse>(json);
 
-            return response.FestivalData.Items;
+                return response.FestivalData.Items;
+            }
+            catch (Exception ex)
+            {
+                Common.logger.Error($"예외발생 : {ex.Message}");
+                return null;
+            }
         }
     }
 }
