@@ -471,33 +471,34 @@ https://github.com/user-attachments/assets/b2f63508-2c0e-4b86-93fe-90f76c27550c
 
 - Fake 데이터를 생성하는 앱
 - 직접 IoT디바이스를 사용하지 않고 테스트
-- 시스템 개발시 실제 데이터를 활용해서 개발 
+- 시스템 개발시 실제 데이터를 활용해서 개발
 - Bogus Package를 사용해서 가짜 데이터 생성
 
-#### 중간실행결과
+##### 중간실행결과
 
 - 현재 방 4개(침실, 욕실, 거실, 주방)을 Faker로 생성
 - 각 방별로 IoT장비(아두이노) + 온습도센서 + 무선통신 구성필요
-- 라즈베리파이 등의 수집장비에서 데이터 수신받은뒤
-- json으로 변경해서 MQTT Broker로 전달 
+- 라즈베피파이 등의 수집장비에서 데이터 수신받은뒤
+- json으로 변경해서 MQTT Broker로 전달
 
 ![alt text](image-41.png)
 
-#### 추가개발건
+##### 추가개발건
 
-- [ ] 리치텍스트박스 텍스트출력 수정
-- [ ] 연결 후 연결종료 처리
-- [ ] 리치텍스트박스에 출력된 이전 텍스트 삭제
+- [x] 리치텍스트박스 텍스트출력 수정
+- [x] 리치텍스트박스에 출력된 이전 텍스트 삭제
+  - 텍스트박스에 데이터가 계속 쌓이면 프로그램 사용메모리가 증가
+- [x] 연결 후 연결종료 처리
 - [ ] MQTT Broker연결 Publish 구현
 - [ ] MySQL DB 센싱데이터 저장
 
 ##### 1차완료 실행결과
 
-![alt text](image-42.png)
+![![alt text](image-43.png)](image-42.png)
 
 #### MQTT 브로커
 
-- MQTT를 사용하는 클라이언트, 서버끼리 직접 통신하지 않음
+- MQTT를 사용하는 클라이언트,서버끼리 직접통신하지 않음
 - 모든 메시지가 Broker를 통해서 전달
 
 ##### 브로커 기능
@@ -521,13 +522,18 @@ https://github.com/user-attachments/assets/b2f63508-2c0e-4b86-93fe-90f76c27550c
 1. https://mosquitto.org/ 사이트 download, Windows > mosquitto-2.1.2-install-windows-x64.exe 설치
 2. 윈도우 시작 > services.msc 실행
 
-3. https://mqtt-explorer.com/
+![alt text](image-44.png)
+
+3. http://mqtt-explorer.com/ 
+
+![alt text](image-45.png)
 
 ##### Mosquitto 설정
 
 - Publish 테스트
+![alt text](image-46.png)
 
-- 설치경로\mosquitto.conf파일
+- 설치경로\mosquitto.conf 파일
 - NotePad 종류를 관리자권한으로 실행
 
 ```conf
@@ -554,7 +560,7 @@ allow_anonymous true
 > mosquitto_passwd.exe -c password.txt root
 Password:
 
-Reenter Password:
+Reenter password:
 
 Adding password for user root
 ```
@@ -563,7 +569,7 @@ Adding password for user root
 - Mosquitto 설치폴더에 붙여넣기
 
 - 서비스에서 Mosquitto 중지
-- Notepad에서 설치경로\mosquitto.cof 파일 오픈
+- Notepad에서 설치경로\mosquitto.conf 파일 오픈
 
 ```conf
 # 암호계정으로 접속 허용
@@ -572,19 +578,23 @@ allow_anonymous false
 password_file C:/Program Files/Mosquitto/password.txt
 ```
 
+- MQTT Explorer 접속테스트
+
+![alt text](image-47.png)
+
 #### MQTT Publish 구현
 - Dummy IoT Data 앱에 구현
 
 ##### MQTTnet 패키지 설치
-- NuGet 패키지 관리에서 MQTTnet 
+- NuGet 패키지 관리에서 MQTTnet 검색 후 설치
 
 #### SmartHome 모니터링 앱
 - MQTT Subscribe 기능
 
-### MVVM은 나중에
-
 #### Dummy IoT Data 생성
 - 1초마다 DB에 저장
+
+### MVVM은 나중에
 
 ## 2. Unity 실습
 
