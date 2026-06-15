@@ -10,6 +10,7 @@ using System.Text.Json;
 using WpfSmartHomeSubscribeApp.Helpers;
 using MQTTnet;
 using System.Text;
+using MySqlConnector;
 
 namespace WpfSmartHomeSubscribeApp
 {
@@ -39,6 +40,8 @@ namespace WpfSmartHomeSubscribeApp
 
         private string DbName { get; set; } = "smarthome";
 
+        private DatabaseHelper db;
+
         #endregion
 
         #region 생성자 영역
@@ -49,7 +52,6 @@ namespace WpfSmartHomeSubscribeApp
 
             // 커스텀 초기화
             IsConnected = false; // 접속안한 상태
-
         }
 
         #endregion
@@ -66,7 +68,7 @@ namespace WpfSmartHomeSubscribeApp
                 return;
             }
 
-            if(string.IsNullOrWhiteSpace(TxtMqttTopic.Text))
+            if (string.IsNullOrWhiteSpace(TxtMqttTopic.Text))
             {
                 await this.ShowMessageAsync("오류", "MQTT토픽을 입력하세요.");
                 Common.logger.Warn("MQTT토픽 미입력!");
@@ -104,7 +106,7 @@ namespace WpfSmartHomeSubscribeApp
                 TxtStatus.Text = "CONNECT";
 
 
-                if(MqttClient != null && MqttClient.IsConnected)
+                if (MqttClient != null && MqttClient.IsConnected)
                 {
                     await MqttClient.DisconnectAsync();
 
@@ -124,7 +126,8 @@ namespace WpfSmartHomeSubscribeApp
             //RtbLog.AppendText($"{topic} : {payload}\r\n"); // 이 방식으로 텍스트 입력 가능
 
             // RichTextBox 활용
-            Dispatcher.Invoke(() => {
+            Dispatcher.Invoke(() =>
+            {
                 // UI스레드와 충돌없이 텍스트 출력방법
                 Paragraph p = new Paragraph();
 
@@ -180,6 +183,8 @@ namespace WpfSmartHomeSubscribeApp
                 string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
 
                 AddLogs(topic, payload);
+
+                await SaveSensorDataAsync(payload);
             };
 
             // DesignPattern Builder 사용
@@ -201,7 +206,61 @@ namespace WpfSmartHomeSubscribeApp
             // Subscribe를 실행
             await MqttClient.SubscribeAsync(subscribeOptions);
 
+            db = new DatabaseHelper();
+            db.connStr = $"Server={DbHost};" +   // 운영아이피로 바꾸세요
+                                 "Port=3306;" +   // 운영포트로 변경할 것
+                                 $"Database={DbName};" +
+                                 $"User ID={DbUser};" +  // 운영DB 사용자로 변경
+                                 $"Password={DbPassword};" +  // 패스워드 변경할 것
+                                 "Charset=utf8mb4;";
+
             AddLogs("SYSTEM", "MQTT 구독 시작");
+        }
+
+        /// <summary>
+        /// Subscribe 데이터 DB저장
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private async Task SaveSensorDataAsync(string payload)
+        {
+
+            try
+            {
+                List<SensorData> sensors = JsonSerializer.Deserialize<List<SensorData>>(payload);
+
+                if (sensors == null || sensors.Count == 0)
+                {
+                    AddLogs("ERROR", "수신된 데이터가 없습니다.");
+                    return;
+                }
+
+                await using var conn = new MySqlConnection(db.connStr);
+                await conn.OpenAsync();
+
+                foreach (var sensor in sensors)
+                {
+                    string query = $@"INSERT INTO smarthome.sensor_data
+                   (home_id, room_name, sensing_datetime, temp, humid, created_at)
+                   VALUES(
+                    '{sensor.HomeId}', 
+                    '{sensor.RoomName}', 
+                    '{sensor.SensingDateTime}', 
+                    {sensor.Temp}, {sensor.Humid}, 
+                    CURRENT_TIMESTAMP);";
+
+                    await using var cmd = new MySqlCommand(query, conn);
+
+                    await cmd.ExecuteNonQueryAsync();
+                }
+
+                AddLogs("DB", $"{sensors.Count}건 DB저장 완료!");
+            }
+            catch (Exception ex)
+            {
+                AddLogs("ERROR", ex.Message);
+            }
         }
 
         #endregion

@@ -604,12 +604,40 @@ password_file C:/Program Files/Mosquitto/password.txt
 
 ##### 구독 실행화면
 
+##### NuGet 패키지 설치
+
+- MySQLConnector 추가
+
+##### DB 테이블 생성
+
+```sql
+CREATE TABLE sensor_data
+(
+    sensor_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    home_id VARCHAR(50) NOT NULL,
+    room_name VARCHAR(50) NOT NULL,
+    sensing_datetime DATETIME NOT NULL,
+    temp DOUBLE NOT NULL,
+    humid DOUBLE NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+##### DB 저장 확인
+
+![alt text](image-49.png)
 
 #### SmartHome 모니터링 앱
 - MQTT Subscribe 기능
 
 #### Dummy IoT Data 생성
 - 1초마다 DB에 저장
+
+
+
+
+
+
 
 ### MVVM은 나중에
 
