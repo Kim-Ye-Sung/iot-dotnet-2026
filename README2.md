@@ -152,6 +152,8 @@ https://github.com/user-attachments/assets/1003c297-420b-46f2-8b83-9a4a416dee7e
 
 https://github.com/user-attachments/assets/403de1f6-c17f-4595-90b7-f50b87cc80dc
 
+- [소스폴더](./wpf/WpfPracticeSolution/WpfCafeKiosk/)
+
 ---
 
 ### 1.2. OpenAPI 연동앱 개발
@@ -435,7 +437,13 @@ public static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
 https://github.com/user-attachments/assets/b2f63508-2c0e-4b86-93fe-90f76c27550c
 
+- [소스폴더](./wpf/WpfPracticeSolution/WpfBusanFestivalApp/)
+
 ### 1.3. SmartHome 솔루션
+
+- 참조 UI 이미지
+
+![alt text](image-48.png)
 
 #### MQTT
 
@@ -587,6 +595,15 @@ password_file C:/Program Files/Mosquitto/password.txt
 
 ##### MQTTnet 패키지 설치
 - NuGet 패키지 관리에서 MQTTnet 검색 후 설치
+
+##### 실행화면
+
+#### MQTT Subscribe 앱
+- MQTT 메시지 수신, DB 저장 기능
+- MQTT Publish 앱 복사, 커스터마이징
+
+##### 구독 실행화면
+
 
 #### SmartHome 모니터링 앱
 - MQTT Subscribe 기능
