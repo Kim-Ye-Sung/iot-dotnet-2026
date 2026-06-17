@@ -94,6 +94,80 @@
 
 - Object를 쌓을때 v를 누르면 Object의 기준점 변경됨
 
+
+#### Chapter 3 Audio Effect
+
+- 냄비 프리팹 선택, 가스레인지 위 위치
+- Audio Source 컴포넌트 추가
+- Auido Generator 선택, Loop 체크
+- Spatial Blend : 2D
+
+#### 배경음악, 새소리
+
+- 계층창에서 Audio Source 선택
+- 알맞은 사운드 Audio Generator에 선택
+- 시작하면서 바로 음악 플레이하고 시픙면
+  - Play on Awake 체크
+- 새소리처럼 랜더마게 플레이하고 싶으면
+  - Play on Awake 체크해제
+  - PlaySoundAtRandomIntervals 스크립트 추가
+  - Min/Max Seconds 랜덤시간 지정
+
+#### Chapter 4. Programming
+- 유니티 개발시 가장 핵심!
+
+
+#### 카메라 플레이어 Child 지정
+
+- Main Camera, Player 하위로 드래그
+- 카메라 위치 Reset 뒤 위치, 회전 수정
+
+- 방 아래 Cube까지 화면에 출력. 위치 조정 잘 해줘야 플레이시 카메라 진동X
+
+#### 플레이모드 변수값 변경
+
+- Speed : 5.0f, RotationSpeed : 120.0f
+- 플레이시 이동속도가 빠름
+- 플레이모드 변수값 수정하면서 알맞은 속도 화인
+- Speed : 0.3f, RotationSpeed : 70.0f 이 적당함
+- Inspector에 지정된 스크립트 Reset
+
+#### 아이템 코인 오브젝트
+
+- Prefab 폴더에서 Collectible Coin 드래그, 위치, 사이즈 조정
+- Collectible.cs 스크립트 생성
+```cs
+public class Collectible : MonoBehaviour
+{
+    [Header("회전 설정")]
+    [Tooltip("프레임당 회전 속도")]
+    [Range(1,10)]
+    public float rotationSpeed = 0.5f;
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Rotate(0, rotationSpeed, 0);
+    }
+}
+```
+
+#### 아이템 획득 기능 추가
+
+- Coin에 Box Collider > `Is Trigger` 체크
+- 충돌은 발생하지 않고, 충돌감지 기능 활성화
+
+- Collectible.cs에 OnTriggerEnter 메서드 추가
+
+```cs
+// 물체까지 충돌이 발생했을때 이벤트 처리
+private void OnTriggerEnter(Collider other)
+{
+  Destroy(gameObject);
+}
+```
+
+#### 점프기능 추가
+
 ### 2.2. Unity Factory
 
 - Unity Technologies Japan에서 제공하는 무료 HDRP 공장 시뮬레이션 에셋
