@@ -321,3 +321,15 @@ Unity에서 건물을 손쉽게 만들 수 있도록 도와주는 패키지
 
 
 - Global Volume 오브젝트, 사용체크 비활성화
+
+
+- URP Asset 생성
+- 프로젝트창 > Create > Rendering > URP Asset (with...) 선택
+
+- Edit > Project Settings > Graphics > Default Render Pipeline 값을 HDRP 종류에서 위에서 생성한 URP 에셋으로 변경
+
+- Edit > Project Setting > Quality > Render Pipeline Asset을 URD로 변경
+
+- 머티리얼 변환
+
+- Window > Rendering > Render Pipeline Converter 선택

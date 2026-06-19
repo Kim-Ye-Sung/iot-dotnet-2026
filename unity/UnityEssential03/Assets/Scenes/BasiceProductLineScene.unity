@@ -278,6 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SensorTrigger
   conveyor1: {fileID: 442926784}
   conveyor2: {fileID: 29099121}
+  spawner: {fileID: 83867902}
 --- !u!4 &273633525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3511806911340499055, guid: 1b4484b9a9d794b4a8f605c4cc0f0156, type: 3}

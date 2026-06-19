@@ -12,6 +12,8 @@ public class SensorTrigger : MonoBehaviour
 
     private bool isProcessing = false;
 
+    public BoxSpawner spawner;
+
     // 다른 Collider가 들어와서 Trigger가 발생하면?
     private void OnTriggerEnter(Collider other)
     {
@@ -32,11 +34,13 @@ public class SensorTrigger : MonoBehaviour
 
         conveyor1.Stop();   // isRunning=false;
         conveyor2.Stop();
+        spawner.Stop();
 
         yield return new WaitForSeconds(3.0f);  // 3초동안 대기한 뒤 다음 로직으로
 
         conveyor1.StartBelt();
         conveyor2.StartBelt();
+        spawner.StartSpawner();
 
         yield return new WaitForSeconds(1.0f);
 
