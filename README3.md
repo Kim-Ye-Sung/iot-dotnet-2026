@@ -333,3 +333,7 @@ Unity에서 건물을 손쉽게 만들 수 있도록 도와주는 패키지
 - 머티리얼 변환
 
 - Window > Rendering > Render Pipeline Converter 선택
+
+
+
+6. IoT Device 
