@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ExitTrigger : MonoBehaviour
 {
-    public GameObject GameOverText;
+    public GameObject gameOverText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,10 +18,10 @@ public class ExitTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            GameOverText.SetActive(true);
-            Time.timeScale = 0.0f;
+            gameOverText.SetActive(true);
+            Time.timeScale = 0f;  // 게임오버 되면 동작 멈춤
         }
     }
 }

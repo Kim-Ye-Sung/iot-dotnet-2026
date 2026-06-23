@@ -11,7 +11,7 @@ namespace WpfSmartHomeSubscribeApp.Helpers
         // MySQL 연결문자열 key=value; 
         public string connStr = "Server=localhost;" +   // 운영아이피로 바꾸세요
                                  "Port=3306;" +   // 운영포트로 변경할 것
-                                 "Database=cafekiosk;" +
+                                 "Database=test;" +
                                  "User ID=root;" +  // 운영DB 사용자로 변경
                                  "Password=my123456;" +  // 패스워드 변경할 것
                                  "Charset=utf8mb4;";

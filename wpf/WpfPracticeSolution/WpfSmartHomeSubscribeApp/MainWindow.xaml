@@ -7,11 +7,11 @@
                  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  xmlns:local="clr-namespace:WpfSmartHomeSubscribeApp"
                  mc:Ignorable="d"
-                 Title="SmartHome Subscribe App" Height="600" Width="700" 
+                 Title="SmartHome Subsciber" Height="600" Width="700" 
                  MinHeight="250" MinWidth="400">
     <mah:MetroWindow.IconTemplate>
         <DataTemplate>
-            <iconPacks:PackIconMaterial Kind="DataBase" Foreground="White"
+            <iconPacks:PackIconMaterial Kind="Database" Foreground="White"
                                            Margin="5,7,0,0" Width="24" />
         </DataTemplate>
     </mah:MetroWindow.IconTemplate>
@@ -20,7 +20,7 @@
         <!-- 상태바 -->
         <StatusBar DockPanel.Dock="Bottom" Height="28" Foreground="White">
             <StatusBarItem>
-                <TextBlock Text="MQTT Fake Simulator V1.0" />
+                <TextBlock Text="MQTT Subscribe App V1.0" />
             </StatusBarItem>
             <Separator Background="White" />
             <StatusBarItem>
@@ -39,14 +39,14 @@
                 <Label Content="MQTT Broker IP" VerticalAlignment="Center" Margin="5,0,0,0" />
                 <TextBox x:Name="TxtMqttBrokerIp" Margin="5" VerticalAlignment="Center"
                  mah:TextBoxHelper.Watermark="브로커 아이피"
-                 Text="192.168.0.4" />
+                 Text="192.168.0.2" />
                 <Label Content="MQTT Topic" VerticalAlignment="Center" Margin="5,0,0,0" />
                 <TextBox x:Name="TxtMqttTopic" Margin="5" VerticalAlignment="Center"
-                 mah:TextBoxHelper.Watermark="브로커 토픽" Text="home/sensor" />
+                    mah:TextBoxHelper.Watermark="브로커 토픽" Text="home/sensor" />
                 <Label Content="Database Ip" VerticalAlignment="Center" Margin="5,0,0,0" />
                 <TextBox x:Name="TxtDatabaseIp" Margin="5" VerticalAlignment="Center"
-                 mah:TextBoxHelper.Watermark="브로커 아이피"
-                 Text="192.168.0.4" />
+                    mah:TextBoxHelper.Watermark="브로커 아이피"
+                    Text="192.168.0.2" />
 
                 <Button x:Name="BtnConnect" Margin="5"
                 Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}" Click="BtnConnect_Click">

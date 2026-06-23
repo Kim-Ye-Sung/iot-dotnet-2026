@@ -99,7 +99,7 @@ namespace WpfSmartHomeSensingApp
 
                 StopSensing(); // 연결종료 후 처리중지
 
-                if(MqttClient != null && MqttClient.IsConnected)
+                if (MqttClient != null && MqttClient.IsConnected)
                 {
                     await MqttClient.DisconnectAsync();
 
@@ -243,7 +243,7 @@ namespace WpfSmartHomeSensingApp
         private async Task PublishMqttAsync(string topic, string payload)
         {
             // Mqtt클라이언트가 아직 초기화 안됐거나, 접속이 안되었다면
-            if(MqttClient == null || !MqttClient.IsConnected)
+            if (MqttClient == null || !MqttClient.IsConnected)
             {
                 AddLogs("ERROR", "MQTT Broker에 접속되지 않았습니다.");
                 return;
@@ -253,7 +253,7 @@ namespace WpfSmartHomeSensingApp
             var message = new MqttApplicationMessageBuilder()
                 .WithTopic(topic)   // 이 토픽으로 데이터 송수신
                 .WithPayload(Encoding.UTF8.GetBytes(payload))   // string을 byte[]로 변경
-                .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.AtLeastOnce)  // 데이터 전송 후 체크x
+                .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.AtLeastOnce)  // 데이터 전송 후 체크X
                 .Build();
 
             await MqttClient.PublishAsync(message);

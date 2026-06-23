@@ -21,8 +21,7 @@ namespace WpfSmartHomeSubscribeApp
     {
         private bool IsConnected { get; set; }  // 접속여부 확인
 
-        private CancellationTokenSource? _cts; // 스레드 캔슬객체 : 비동기 작업 중지시켜주는 객체
-
+        private CancellationTokenSource? _cts; // 스레드 캔슬객체 : 비동기 작업 중지시켜주는 객체       
 
         #region MQTT/DB 전송용 속성/변수들
 
@@ -32,12 +31,9 @@ namespace WpfSmartHomeSubscribeApp
         private string MqttUser { get; set; } = "root";
         private string MqttPassword { get; set; } = "mqtt123456";
         private string MqttTopic { get; set; } = "home/sensor";
-
         private string DbHost { get; set; } = "127.0.0.1";
         private string DbUser { get; set; } = "root";
-
         private string DbPassword { get; set; } = "my123456";
-
         private string DbName { get; set; } = "smarthome";
 
         private DatabaseHelper db;
@@ -77,7 +73,7 @@ namespace WpfSmartHomeSubscribeApp
 
             if (string.IsNullOrWhiteSpace(TxtDatabaseIp.Text))
             {
-                await this.ShowMessageAsync("오류", "Database IP를 입력하세요.");
+                await this.ShowMessageAsync("오류", "Database IP응 입력하세요.");
                 Common.logger.Warn("Database IP 미입력!");
                 return;
             }
@@ -91,43 +87,21 @@ namespace WpfSmartHomeSubscribeApp
                 // Mqtt브로커 접속 시도
                 await ConnectMqttAsync();
 
-                // 아이피주소 형식에 맞지않으면 메시지창 출력
-                IsConnected = true;
-                TxtStatus.Text = "DISCONNECT";
-
-                AddLogs("SYSTEM", "MQTT Subscribe 접속시작");
-                Common.logger.Info("MQTT Subscribe 시작");
-                SbiStatus.Text = "MQTT 연결 시작";
-
+                       
             }
             else
             {
-                IsConnected = false;
-                TxtStatus.Text = "CONNECT";
-
-
-                if (MqttClient != null && MqttClient.IsConnected)
-                {
-                    await MqttClient.DisconnectAsync();
-
-                    AddLogs("SYSTEM", "MQTT 브로커 접속종료");
-                    Common.logger.Info("MQTT Subscrib 접속종료");
-                    SbiStatus.Text = "MQTT 연결 종료";
-                }
+                await DisconnectMqttAsync();
             }
         }
 
         #endregion
 
         #region 커스텀메서드 영역
+
         private void AddLogs(string topic, string payload)
         {
-            // 언젠가 응답없음 발생함!
-            //RtbLog.AppendText($"{topic} : {payload}\r\n"); // 이 방식으로 텍스트 입력 가능
-
-            // RichTextBox 활용
-            Dispatcher.Invoke(() =>
-            {
+            Dispatcher.BeginInvoke(() => {
                 // UI스레드와 충돌없이 텍스트 출력방법
                 Paragraph p = new Paragraph();
 
@@ -170,24 +144,22 @@ namespace WpfSmartHomeSubscribeApp
         /// </summary>
         private async Task ConnectMqttAsync()
         {
-            // MQTTnet으로 초기화 할 때 동일한 방식
+            // DB 설정
+            db = new DatabaseHelper();
+            db.connStr = $"Server={DbHost};" +
+                          "Port=3316;" +
+                         $"Database={DbName};" +
+                         $"User ID={DbUser};" +
+                         $"Password={DbPassword};" +
+                          "Charset=utf8mb4;";
+
             var factory = new MqttClientFactory();
-            MqttClient = factory.CreateMqttClient();  // DesignPattern 중 Factory 메서드 방식으로 객체 생성
+            MqttClient = factory.CreateMqttClient();
 
-            // Subscribe 핵심 - 데이터가 Publish(배포)되면 곧바로 Subscribe(구독) 
+            // Subscribe 핵심 - 데이터가 Publish(배포)되면 곧바로 Subscribe(구독)
             // Subscribe 실행된 후 Payload가 넘어왔을때 이벤트 처리
-            MqttClient.ApplicationMessageReceivedAsync += async e =>
-            {
-                string topic = e.ApplicationMessage.Topic;
+            MqttClient.ApplicationMessageReceivedAsync += OnMqttMessageReceivedAsync;
 
-                string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-
-                AddLogs(topic, payload);
-
-                await SaveSensorDataAsync(payload);
-            };
-
-            // DesignPattern Builder 사용
             var options = new MqttClientOptionsBuilder()
                 .WithClientId($"WPF-Subscriber-{Guid.NewGuid()}")
                 .WithTcpServer(MqttHost, MqttPort)
@@ -204,17 +176,55 @@ namespace WpfSmartHomeSubscribeApp
                 .Build();
 
             // Subscribe를 실행
-            await MqttClient.SubscribeAsync(subscribeOptions);
+            await MqttClient.SubscribeAsync(subscribeOptions);                        
 
-            db = new DatabaseHelper();
-            db.connStr = $"Server={DbHost};" +   // 운영아이피로 바꾸세요
-                                 "Port=3306;" +   // 운영포트로 변경할 것
-                                 $"Database={DbName};" +
-                                 $"User ID={DbUser};" +  // 운영DB 사용자로 변경
-                                 $"Password={DbPassword};" +  // 패스워드 변경할 것
-                                 "Charset=utf8mb4;";
+            IsConnected = true;
+            TxtStatus.Text = "DISCONNECT";
 
-            AddLogs("SYSTEM", "MQTT 구독 시작");
+            AddLogs("SYSTEM", "MQTT Subscribe 접속시작");
+            Common.logger.Info("MQTT Subscribe 시작");
+            SbiStatus.Text = "MQTT 연결 시작";
+        }
+
+        private async Task OnMqttMessageReceivedAsync(MqttApplicationMessageReceivedEventArgs e)
+        {
+            string topic = e.ApplicationMessage.Topic;
+            string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+
+            AddLogs(topic, payload);
+
+            await SaveSensorDataAsync(payload);
+        }
+
+        private async Task DisconnectMqttAsync()
+        {
+            IsConnected = false;
+            TxtStatus.Text = "CONNECT";
+
+            try
+            {
+                if (MqttClient != null)
+                {
+                    MqttClient.ApplicationMessageReceivedAsync -= OnMqttMessageReceivedAsync;
+
+                    if (MqttClient.IsConnected)
+                    {
+                        await MqttClient.DisconnectAsync();
+                    }
+
+                    MqttClient.Dispose();
+                    MqttClient = null;
+                }
+
+                AddLogs("SYSTEM", "MQTT 브로커 접속종료");
+                Common.logger.Info("MQTT Subscribe 접속종료");
+                SbiStatus.Text = "MQTT 연결 종료";
+            }
+            catch (Exception ex)
+            {
+                AddLogs("ERROR", ex.Message);
+                Common.logger.Error(ex);
+            }
         }
 
         /// <summary>
@@ -224,10 +234,10 @@ namespace WpfSmartHomeSubscribeApp
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         private async Task SaveSensorDataAsync(string payload)
-        {
-
+        {           
             try
             {
+                // JSON 역직렬화
                 List<SensorData> sensors = JsonSerializer.Deserialize<List<SensorData>>(payload);
 
                 if (sensors == null || sensors.Count == 0)
@@ -236,21 +246,25 @@ namespace WpfSmartHomeSubscribeApp
                     return;
                 }
 
+                const string query = @"
+                                        INSERT INTO sensor_data
+                                            (home_id, room_name, sensing_datetime, temp, humid, created_at)
+                                        VALUES
+                                            (@home_id, @room_name, @sensing_datetime, @temp, @humid, CURRENT_TIMESTAMP);
+                                    ";
+
                 await using var conn = new MySqlConnection(db.connStr);
                 await conn.OpenAsync();
 
                 foreach (var sensor in sensors)
                 {
-                    string query = $@"INSERT INTO smarthome.sensor_data
-                   (home_id, room_name, sensing_datetime, temp, humid, created_at)
-                   VALUES(
-                    '{sensor.HomeId}', 
-                    '{sensor.RoomName}', 
-                    '{sensor.SensingDateTime}', 
-                    {sensor.Temp}, {sensor.Humid}, 
-                    CURRENT_TIMESTAMP);";
-
                     await using var cmd = new MySqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@home_id", sensor.HomeId);
+                    cmd.Parameters.AddWithValue("@room_name", sensor.RoomName);
+                    cmd.Parameters.AddWithValue("@sensing_datetime", sensor.SensingDateTime);
+                    cmd.Parameters.AddWithValue("@temp", sensor.Temp);
+                    cmd.Parameters.AddWithValue("@humid", sensor.Humid);
 
                     await cmd.ExecuteNonQueryAsync();
                 }
@@ -260,8 +274,11 @@ namespace WpfSmartHomeSubscribeApp
             catch (Exception ex)
             {
                 AddLogs("ERROR", ex.Message);
+                Common.logger.Error(ex);
             }
         }
+
+        
 
         #endregion
     }

@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: e80749fc678ab394c89b8a6441a38548
+  productGUID: e624fba996f220148adfe50ec87864e8
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -762,11 +762,11 @@ PlayerSettings:
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: 02130b94-15f7-4953-be63-0ca8770e93fe
+  cloudProjectId: fb024752-51c0-40ff-b35c-de83d77d5b54
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: UnityBasicStudy
-  organizationId: pigmeup
+  organizationId: personar95mpcjr802
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -6,22 +6,23 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 /// <summary>
-/// Simple script to simulate iot building device messages with randomized telemetry data.
+/// 무작위 텔레메트리(계측) 데이터를 생성하여 스마트 빌딩의 IoT 디바이스 메시지를 시뮬레이션하는 컴포넌트
 /// </summary>
 public class DeviceSimulator : MonoBehaviour
 {
     public delegate void DeviceMessage(string message);
     public event DeviceMessage OnDeviceMessage;
 
-    // Configuration of the devices to simulate
+    // 시뮬레이션 하기위한 데이터 설정
+    // MQTT 메시지 생성할때 어떤 장비인지 아래의 device_id 중 하나로 생성
     private List<DeviceConfiguration> deviceConfigurations = new List<DeviceConfiguration>
     {
-        // Doors
+        // 문
         new DeviceConfiguration { device_id = "CanteenDoor_Sensor", type = "door_sensor" },
         new DeviceConfiguration { device_id = "ReceptionDoor_Sensor", type = "door_sensor" },
         new DeviceConfiguration { device_id = "Door3_Door_Sensor", type = "door_sensor" },
 
-        // Air Handling
+        // Air Handling(HVAC)
         new DeviceConfiguration { device_id = "AirHandlingUnit_001", type = "thermostat" },
         new DeviceConfiguration { device_id = "AirHandlingUnit_002", type = "thermostat" },
         new DeviceConfiguration { device_id = "AirHandlingUnit_003", type = "thermostat" },
@@ -42,7 +43,7 @@ public class DeviceSimulator : MonoBehaviour
         new DeviceConfiguration { device_id = "AirHandlingUnit_017", type = "thermostat" },
         new DeviceConfiguration { device_id = "AirHandlingUnit_018", type = "thermostat" },
 
-        // Occupancy
+        // Occupancy(좌석)
         new DeviceConfiguration { device_id = "LunchTable_1", type = "occupancy_sensor" },
         new DeviceConfiguration { device_id = "LunchTable_2", type = "occupancy_sensor" },
         new DeviceConfiguration { device_id = "LunchTable_3", type = "occupancy_sensor" },

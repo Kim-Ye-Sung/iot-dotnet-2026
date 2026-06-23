@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -6,53 +6,57 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    [Tooltip("Forward/back speed (units/sec).")]
-    public float speed = 0.5f;
+    [Tooltip("전진후진 속도 (units/sec).")]
+    public float speed = 0.3f; // 5.0f;
 
-    [Tooltip("Turn speed (degrees/sec).")]
-    public float rotationSpeed = 120.0f;
+    [Tooltip("회전속도 (degrees/sec).")]
+    public float rotationSpeed = 70.0f; //120.0f;
 
-    private Rigidbody rb;
+    [Tooltip("점프강도")]
+    public float jumpForce = 3.0f;
 
-    public float JumpForce = 5.0f;
+    private Rigidbody rb; // 리지드바디 
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();      
         if (rb == null) Debug.LogWarning("PlayerController needs a Rigidbody.");
     }
 
+    // 입력처리, 카메라... Frame별 실행
+    // LateUpdate() : Update() 후에 실행되는 메서드. 카메라 추적
     private void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.VelocityChange);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
         }
     }
-    
+
+    // 고정시간 간격으로 업데이트, RigidBody 등의 처리
     private void FixedUpdate()
     {
         Vector2 moveInput = Vector2.zero;
 
-        // Forward/backward
+        // 앞뒤 움직임 , w(up key),s(down key)
         if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) moveInput.y = 1f;
         if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed) moveInput.y = -1f;
 
-        // Left/right (rotation)
+        // 좌우 회전, a(left), d(right key)
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) moveInput.x = -1f;
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveInput.x = 1f;
 
         // Move in facing direction 
         Vector3 movement = transform.forward * moveInput.y * speed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        rb.MovePosition(rb.position + movement); // 위치이동
 
         // Y-axis rotation (invert when going backwards)
         float turnDirection = moveInput.x;
         if (moveInput.y < 0)
-            turnDirection = -turnDirection;
+            turnDirection = -turnDirection;  
 
-        float turn = turnDirection * rotationSpeed * Time.fixedDeltaTime;
+        float turn = turnDirection * rotationSpeed * Time.fixedDeltaTime;  // 회전값
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-        rb.MoveRotation(rb.rotation * turnRotation);
+        rb.MoveRotation(rb.rotation * turnRotation); // 회전
     }
 }

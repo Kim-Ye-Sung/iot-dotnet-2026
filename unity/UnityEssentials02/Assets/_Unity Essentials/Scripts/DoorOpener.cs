@@ -1,18 +1,25 @@
 using UnityEngine;
 
+
 public class DoorOpener : MonoBehaviour
 {
-    private
+    private Animator doorAnimator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // 현재 오브젝트에 할당된 애니메이터를 가져올 것
+        doorAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnTriggerEnter(Collider other)
+    {        
+        if (other.CompareTag("Player")) // 게임오브젝트 중 Player라는 태그를 가지고 있는 객체에 
+        {
+            if (doorAnimator != null)
+            {
+                // Door_Open 애니메이션을 실행하라
+                doorAnimator.SetTrigger("Door_Open");
+            }
+        }
     }
 }
