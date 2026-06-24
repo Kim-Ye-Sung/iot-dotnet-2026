@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js DOM</title>
+</head>
+<body>
+    <h2 id="title">Hello Javascript!!</h2>
+
+    <script>
+        // 모든 HTML의 태그를 js에서 접근가능
+        // HTMLElement 타입을 받아옴
+        let title = document.getElementById('title');
+
+        console.log(title.innerText); // h2 태크 내 텍스를 읽어서 콘솔출력
+
+        title.innerText= "야, 바꿔~~";
+    </script>
+
+    <button onclick="greeting()">클릭</button>
+
+    <script>
+        function greeting()
+        {
+            alert("안녕하세요~!");
+        }
+    </script>
+</body>
+</html>

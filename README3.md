@@ -1155,3 +1155,6 @@ https://github.com/user-attachments/assets/8805de0b-a617-4fc5-939c-fb3e14c67de6
 #### Unity MQTT Subscribe 메시지 수신
 
 ### 2.9. Unity Factory 컨버전
+
+
+[데스크탑 학습](./README2.md)
