@@ -545,7 +545,203 @@ VALUES
 
 #### ProductsController 생성
 
-- To Be Continued...
+- Controller / ProductsController.cs - [소스](./webapp/WebApiSolution/ProductApi/Controllers/ProductsController.cs)
+
+#### GET 메서드
+
+
+
+#### 실행결과
+
+![alt text](image-187.png)
+
+#### 일반메서드 vs 비동기메서드
+
+- 일반메서드 - DB처리가 완료될때까지 나머지 로직이 중지
+```cs
+[HttpGet]   // GET 메서드 선언(없어도 기본)
+public IActionResult GetProducts()
+{
+    List<Product> products = new();  // new List<Product>(); 와 동일기능
+
+    using var conn = new MySqlConnection(connString);
+    conn.Open();
+
+    string query = 
+        """
+        SELECT product_id, product_name, category, price, stock, created_at
+         FROM products
+        ORDER BY product_id DESC
+        """;  // 여러줄 문자열 @" 또는 """
+
+    using var cmd = new MySqlCommand(query, conn);
+    using var reader = cmd.ExecuteReader();
+
+    while(reader.Read())  // 
+    {
+        Product product = new Product
+        {
+            ProductId = reader.GetInt32("product_id"),
+            ProductName = reader.GetString("product_name"),
+            Category = reader.GetString("category"),
+            Price = reader.GetDecimal("price"),
+            Stock = reader.GetInt32("stock"),
+            CreatedAt = reader.GetDateTime("created_at")
+        };
+
+        products.Add(product);
+    }
+
+    return Ok(products);
+}
+```
+
+- 비동기 메서드 - 백그라운드로 동작, 다른기능 사용
+
+![alt text](image-188.png)
+
+```cs
+[HttpGet]   // GET 메서드 선언(없어도 기본)
+public async Task<IActionResult> GetProductsAsync()
+{
+    ...
+    await conn.OpenAsync();
+
+    string query = 
+        """
+        SELECT product_id, product_name, category, price, stock, created_at
+         FROM products
+        ORDER BY product_id DESC
+        """;  // 여러줄 문자열 @" 또는 """
+
+    using var cmd = new MySqlCommand(query, conn);
+    using var reader = await cmd.ExecuteReaderAsync();
+
+    while(await reader.ReadAsync())  // 
+    {
+        Product product = new Product
+        {
+            ProductId = reader.GetInt32("product_id"),
+            ProductName = reader.GetString("product_name"),
+            Category = reader.GetString("category"),
+            Price = reader.GetDecimal("price"),
+            Stock = reader.GetInt32("stock"),
+            CreatedAt = reader.GetDateTime("created_at")
+        };
+
+        products.Add(product);
+    }
+
+    return Ok(products);
+}
+```
+
+- GET /api/products
+
+#### GET 단건 조회
+
+- ProductsController에 단건 조회용 메서드 생성
+
+- GET /api/products/id
+
+#### 실행결과
+
+![alt text](image-189.png)
+
+- 성공화면
+
+![alt text](image-190.png)
+
+- 실패화면
+
+![alt text](image-191.png)
+
+- 포스트맨 결과화면
+
+- 공공데이터포털 기능은 대부분 여기까지
+
+#### POST 상품 등록
+
+- ProductsController에 단건 등록 메서드 생성
+- POST /api/products
+
+#### PostMan에서 테스트
+
+- GET 메서드 이외는 웹브라우저에서 테스트 매우 어려움
+- Swagger, Postman 등의 테스트 툴 사용 거의 필수
+
+#### 실행결과
+
+![alt text](image-192.png)
+
+- Postmans Post메서드 선택, Body > raw > json 데이터 입력, Send
+- Response 결과 맨아래 확인
+
+![alt text](image-193.png)
+
+- DB 입력 화면
+
+#### Command Excute 비교
+
+|메서드|사용방법|
+|---|---|
+|ExcuteReader()| SELECT 여러 행 조회 |
+|ExecuteNonQuery() | INSERT, UPDATE, DELETE 실행 |
+|ExecuteScalar() | 값 1개 반환(COUNT, MAX/MIN, LAST_INSERT_ID 등)|
+
+- 비동기는 ~Async()로 작성할 것
+
+#### PUT - 상품 수정
+
+- POST 메서드로 구현 가능
+
+- PUT /api/products/id
+
+```cs
+
+```
+
+#### PATCH - 필요컬럼 수정
+
+- POST 메서드로 구현 가능. 기능을 완전 분리하고 싶을때 사용
+- PATCH /api/products/id
+- 재고만 수정하거나 카테고리만 수정하고 싶은 기능을 추가하고자 할때
+
+- Models Product.cs를 복사해서 ProductStock.cs로 변경
+- [HttpPatch("{id}/stock")] 로 URL 변경
+
+- PATCH 메서드에 맞게 URL 변경
+
+
+#### DELETE - 상품 삭제
+
+- DELETE /api/products/id
+- HttpDelete 메서드 추가
+
+#### 실행결과
+
+
+
+
+#### CORS 설정
+
+- Cross Origin Resource Sharing 교차 출처 자원 공유. 서버가 다른 곳에 데이터 요청을 안전하게 하도록 허용해주는 설정
+- Program.cs 추가
+
+#### HTML + Javascript
+
+- product-client.html 생성
+- HTML, Javascript 구현
+
+#### 실행결과 
+
+- 일반 조회결과
+
+#### WPF
+
+#### Unity
+
+#### ASP.NET Core MVC
 
 
 

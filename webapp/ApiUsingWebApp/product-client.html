@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 관리</title>
+</head>
+<body>
+    <h2>상품 목록</h2>
+    <hr>
+    <button onclick="loadProducts()" class="btn btn-sm btn-primary">상품 조회</button>
+
+    <ul id="productList" class="row mb-2"></ul>
+
+    <script>
+        const API_URL = 'http://localhost:5500/api/products/';
+
+        async function loadProducts()
+        {
+            const response = await fetch(API_URL);
+            const products = await response.json();
+
+            const productList = document.getElementById("productList"); // ul 태그 아이디
+            productList.innerHTML = '';
+
+            products.forEach(product =>{
+                const li = document.createElement('li');  // js에서 동적으로 li 태그 생성
+                // javascript에서는 {}로 변수 사용할때 ``문자열 내부 ${}
+                li.textContent = 
+                '${product.productId}  / ${product.productName} / ${product.price}원 / 재고 ${product.stock}개';
+                productList.appendChild(li);           
+            });
+        }
+    </script>
+</body>
+</html>
