@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DotNet11WebApp/DotNet11WebApp.csproj" />
+  <Project Path="DotNet12BooksApi/DotNet12BooksApi.csproj" Id="eeb1daf5-d014-4805-9378-b6039af5c056" />
+</Solution>

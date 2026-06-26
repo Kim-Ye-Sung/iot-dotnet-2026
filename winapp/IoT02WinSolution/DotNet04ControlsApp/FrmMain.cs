@@ -355,5 +355,10 @@ namespace DotNet04ControlsApp
                 e.Cancel = true;  // 종료가 취소됨
             }
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            LblCurrentTIme.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
     }
 }

@@ -2,14 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
     <title>HTML 태그학습</title>
     <!-- favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
     <!-- 제목 1 -->
-    <h1>HTML 기본 태그 실습</h1>
+    <h1>HTML 기본 태그 실습. #</h1>
     <!-- 마크다운 (---) -->
     <hr>
     <h2>소제목. ##</h2>
@@ -17,23 +17,24 @@
     <h3>작은제목. ###</h3>
     
     <!-- 문단 -->
-    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, beatae?</p>
     <!-- &***; 키워드 -->
-    <p>Lorem &nbsp;&nbsp;&nbsp;&nbsp; ipsum dolor sit amet consectetur adipisicing elit.<br> Amet accusantium, eum nihil ipsa velit aspernatur beatae voluptas a quos suscipit.</p>
-
+    <p>Lorem &nbsp;&nbsp;&nbsp;&nbsp; ipsum dolor sit amet, consectetur adipisicing elit.<br> Nemo corporis dolorem deleniti, labore magni nam hic sed quidem quos aspernatur?</p>
+    
     <!-- 링크 href (hyper reference). target="_blank" 새창/새탭으로 이동 -->
     <a href="https://www.google.com" target="_blank">구글</a>
 
     <hr>
 
-    <!-- 이미지 ![이미지명](./이미지주소)-->
+    <!-- 이미지 ![이미지명](./이미지주소) -->
     <h3>이미지</h3>
     <img src="https://picsum.photos/400/200" 
-        width="500" height="250" alt="랜덤이미지">
+         witdh="500" height="250" alt="랜덤이미지">
 
     <hr>
 
     <h3>동영상</h3>
+
     <video width="500" controls>
         <source src="./sample.mp4" type="video/mp4">
     </video>
@@ -42,11 +43,13 @@
 
     <h3>유튜브 동영상</h3>
 
-    <iframe width="500" height="300"
-            src="https://www.youtube.com/watch?v=5vVAhXROg1w"
+    <iframe width="500" height="300" 
+            src="https://www.youtube.com/embed/otw7mbcpbVg?si=tk4tLA0Au5bNtBFU" 
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-    <!-- 목록. 마크다운 -, *, -->
+    <hr>
+
+    <!-- 목록. 마크다운 -, *,  -->
     <h3>순서 없는 목록</h3>
     <ul>
         <li>애플망고</li>
@@ -55,7 +58,6 @@
         <li>사과</li>
     </ul>
 
-        <!-- 목록. 마크다운 -, *, -->
     <h3>순서 있는 목록</h3>
     <ol>
         <li>애플망고</li>
@@ -73,21 +75,20 @@
     <div style="border:1px solid black; padding: 10px;">
         1번 영역
     </div>
-
     <div style="border:1px solid red; padding: 10px; margin-top:10px;">
         2번 영역
     </div>
 
     <hr>
-
+    
     <!-- 인라인 영역(내부 데이터 크기만큼만 영역) -->
     <h3>SPAN 영역</h3>
-    
+
     <span style="border:1px solid black; padding: 10px;">1번 영역</span>
-    <span style="border:1px solid red; padding: 10px; margin-left: 10px;">
+    <span style="border:1px solid red; padding: 10px; margin-left:10px;">
         2번 영역
     </span>
-
+    
     <hr>
 
     <h3>테이블</h3>
@@ -111,8 +112,8 @@
             <td>김철수</td>
             <td>60</td>
             <td>무직</td>
+            
         </tr>
     </table>
-
 </body>
 </html>

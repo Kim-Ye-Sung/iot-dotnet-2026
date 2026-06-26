@@ -934,4 +934,4 @@ if (!int.TryParse(TxtPrice.Text, out int price))
 - [xaml](./wpf/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml)
 - [소스](./wpf/IotWpfSolutions/WpfBasic04DbApp/MainWindow.xaml.cs)
 
-> [다음](./README2.md)
+> [데스크탑 학습](./README2.md)

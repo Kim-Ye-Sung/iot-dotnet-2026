@@ -1,6 +1,14 @@
-﻿namespace WebApplication1.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WebApplication1.Models
 {
-    public class MySqlDbContext
+    public class MySqlDbContext : DbContext
     {
+        public MySqlDbContext(DbContextOptions options) : base(options)
+        {
+            // 자동생성. 내용없음
+        }
+
+        public DbSet<Book> Books => Set<Book>();
     }
 }

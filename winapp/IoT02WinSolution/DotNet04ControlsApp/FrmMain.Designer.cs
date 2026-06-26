@@ -64,6 +64,9 @@
             RtbEditor = new RichTextBox();
             DlgOpenFile = new OpenFileDialog();
             WrkProcess = new System.ComponentModel.BackgroundWorker();
+            statusStrip1 = new StatusStrip();
+            LblCurrentTIme = new ToolStripStatusLabel();
+            timer1 = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TrkStatus).BeginInit();
@@ -72,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)PicImage).BeginInit();
             groupBox5.SuspendLayout();
             groupBox6.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -88,7 +92,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(382, 135);
+            groupBox1.Size = new Size(382, 160);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "기본 컨트롤";
@@ -188,7 +192,7 @@
             groupBox2.Controls.Add(TrkStatus);
             groupBox2.Location = new Point(12, 153);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(382, 132);
+            groupBox2.Size = new Size(382, 157);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "트랙바, 진행바";
@@ -220,7 +224,7 @@
             groupBox3.Controls.Add(TvwDummy);
             groupBox3.Location = new Point(12, 291);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(382, 250);
+            groupBox3.Size = new Size(382, 262);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "트리, 리스트뷰";
@@ -280,7 +284,7 @@
             groupBox4.Controls.Add(PicImage);
             groupBox4.Location = new Point(400, 12);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(382, 300);
+            groupBox4.Size = new Size(382, 325);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "픽쳐박스";
@@ -314,7 +318,7 @@
             groupBox5.Controls.Add(TxtLog);
             groupBox5.Location = new Point(400, 318);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(382, 223);
+            groupBox5.Size = new Size(382, 235);
             groupBox5.TabIndex = 3;
             groupBox5.TabStop = false;
             groupBox5.Text = "스레드";
@@ -373,7 +377,7 @@
             groupBox6.Controls.Add(RtbEditor);
             groupBox6.Location = new Point(788, 12);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(382, 529);
+            groupBox6.Size = new Size(382, 541);
             groupBox6.TabIndex = 4;
             groupBox6.TabStop = false;
             groupBox6.Text = "텍스트에디터";
@@ -420,11 +424,34 @@
             WrkProcess.ProgressChanged += WrkProcess_ProgressChanged;
             WrkProcess.RunWorkerCompleted += WrkProcess_RunWorkerCompleted;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { LblCurrentTIme });
+            statusStrip1.Location = new Point(0, 552);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1182, 26);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // LblCurrentTIme
+            // 
+            LblCurrentTIme.Name = "LblCurrentTIme";
+            LblCurrentTIme.Size = new Size(113, 20);
+            LblCurrentTIme.Text = "LblCurrentTIme";
+            // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1182, 553);
+            ClientSize = new Size(1182, 578);
+            Controls.Add(statusStrip1);
             Controls.Add(groupBox6);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
@@ -449,7 +476,10 @@
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
             groupBox6.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
 
@@ -494,5 +524,8 @@
         private Button BtnFileSave;
         private Button BtnFileLoad;
         private RichTextBox RtbEditor;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel LblCurrentTIme;
+        private System.Windows.Forms.Timer timer1;
     }
 }
