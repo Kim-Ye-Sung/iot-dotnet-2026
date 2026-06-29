@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:local="clr-namespace:WpfProductAdmin"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:WpfProductAdmin"
         mc:Ignorable="d"
         Title="제품관리" Height="450" Width="800" Loaded="MetroWindow_Loaded">
     <mah:MetroWindow.IconTemplate>
@@ -54,7 +54,7 @@
                             Orientation="Horizontal"
                             VerticalAlignment="Center">
 
-                    <!--<TextBlock Text="페이지번호"
+                    <!-- TextBlock Text="페이지번호"
                                VerticalAlignment="Center"
                                FontWeight="Bold"
                                Margin="0,0,8,0"/>
@@ -79,7 +79,7 @@
                                    Maximum="100"
                                    Value="10"
                                    FontSize="16"
-                                   Margin="0,0,12,0"/>-->
+                                   Margin="0,0,12,0"/ -->
 
                     <Button x:Name="BtnSearch"
                             Width="75"
@@ -92,12 +92,27 @@
                             <TextBlock Text="조 회" />
                         </StackPanel>
                     </Button>
+
+                    <Button x:Name="BtnCreate"
+                            Width="75"
+                            Height="38"
+                            Foreground="White"                            
+                            FontWeight="Bold"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource MahApps.Styles.Button.Dialogs.Accent}" 
+                            Background="ForestGreen"
+                            Click="BtnCreate_Click">      
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign Kind="NewReleases" Margin="0,0,5,0" />
+                            <TextBlock Text="상품등록" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
 
             <!-- 데이터 목록 -->
             <DataGrid Grid.Row="2"
-                      x:Name="DgrFestival"
+                      x:Name="DgrProduct"
                       Margin="10,0,10,0"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
@@ -106,25 +121,24 @@
                       RowHeaderWidth="0"
                       SelectionMode="Single"
                       SelectionUnit="FullRow"
-                      IsReadOnly="True"
-                      >
+                      IsReadOnly="True">
 
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="순번"
+                    <DataGridTextColumn Header="ID"
                                         Binding="{Binding ProductId}"
-                                        Width="55"/>
+                                        Width="60"/>
 
-                    <DataGridTextColumn Header="제품명"
+                    <DataGridTextColumn Header="상품명"
                                         Binding="{Binding ProductName}"
-                                        Width="170"/>
+                                        Width="200"/>
 
                     <DataGridTextColumn Header="카테고리"
                                         Binding="{Binding Category}"
-                                        Width="80"/>
+                                        Width="120"/>
 
                     <DataGridTextColumn Header="가격"
-                                        Binding="{Binding Price}"
+                                        Binding="{Binding Price, StringFormat={}{0:N0}원}"
                                         Width="100"/>
 
                     <DataGridTextColumn Header="재고"
@@ -132,12 +146,8 @@
                                         Width="60"/>
 
                     <DataGridTextColumn Header="등록일"
-                                        Binding="{Binding CreatedAt}"
+                                        Binding="{Binding CreatedAt, StringFormat={}{0:yyyy-MM-dd}}"
                                         Width="*"/>
-
-                    <!--<DataGridTextColumn Header="내용"
-                                        Binding="{Binding ItemCntnts}"
-                                        Width="*"/>-->
 
                 </DataGrid.Columns>
             </DataGrid>
