@@ -786,9 +786,14 @@ public async Task<IActionResult> GetProductsAsync() {
 - PUT, DELETE 기능 구현
 - Validation Check, Exception Handling 추가
 
+#### 결론
 
+- 기존 방식 - WPF에 DB 핸들링위해서 SQL 처리, 웹개발(ASP.NET 포함)때도 DB 핸들링 SQL 처리 필요
+- REST API 방식 -DB 핸들링은 REST API 서비스에서 통합개발. 각 클라이언트에서는 서비스URL 호출(요청)으로 데이터를 처리
 
-#### Unity
+#### Unity + RESTAPI 애플리케이션
+
+#### Unity 프로젝트
 
 ## 4. 웹 실습 프로젝트
 

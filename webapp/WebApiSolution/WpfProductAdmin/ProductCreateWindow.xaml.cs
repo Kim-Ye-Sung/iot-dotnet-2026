@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,20 @@ namespace WpfProductAdmin
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            // Validation Check
+            if (string.IsNullOrEmpty(TxtProductName.Text.Trim()))
+            {
+                MessageBox.Show("상품명을 입력하세요.");
+                TxtProductName.Focus(); // 상품명 입력창에 포커스
+                return;
+            }
+
+            if (!int.TryParse(NudStock.Value.ToString(), out int stock))
+            {
+                await this.ShowMessageAsync("입력오류", "재고는 숫자로 입력하세요.");
+                return;
+            }
+
             Product product = new Product
             {
                 ProductName = TxtProductName.Text.Trim(),
