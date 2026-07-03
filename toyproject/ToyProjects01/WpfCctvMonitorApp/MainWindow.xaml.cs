@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
+using Wpf.Ui;
 using Wpf.Ui.Controls;
 using WpfCctvMonitorApp.Common;
 using WpfCctvMonitorApp.Models;
@@ -25,6 +26,9 @@ namespace WpfCctvMonitorApp
         // 지역 선택한 위경도 범위 저장할 변수
         private GeoBound selectedGeoBound;
 
+        // WPF UI 다이얼로그 동작 서비스 인터페이스
+        private IContentDialogService contentDialogService;
+
         #endregion
 
         #region "기본 생성자 및 이벤트핸들러 영역"
@@ -38,6 +42,8 @@ namespace WpfCctvMonitorApp
 
             InitLibVlc();   // VLC라이브러리 초기화 메서드를 분리하면 readonly 사용불가
             InitWebApiService();  // 웹서비스 초기화
+
+            contentDialogService.SetDialogHost(RootContentDialogHost);  // 일단 초기화
         }
 
         /// <summary>
@@ -58,8 +64,18 @@ namespace WpfCctvMonitorApp
                 return;
             }
 
+            InitAppName();
             InitStatusBar();  // xaml 화면 텍스트들 초기화 
             InitComboItems();  // 콤보박스 지역 리스트업
+        }
+
+        private void InitAppName()
+        {
+            // 비하인드코드로 작업하면 유지보수가 쉬움
+            // 윈도우타이틀, WPF UI TitleBar 공통작업
+            // HACK : 제목을 변경하려면 AppCommon.appName을 변경하세요~
+            this.Title =TlbMain.Title = AppCommon.appName;
+
         }
 
         private void BtnExpress_Click(object sender, RoutedEventArgs e)
@@ -133,7 +149,8 @@ namespace WpfCctvMonitorApp
             // Validation Check
             if (selectedGeoBound == null)
             {
-                System.Windows.MessageBox.Show("지역을 선택하세요", "오류");
+                //System.Windows.MessageBox.Show("지역을 선택하세요", "오류");
+                //await ShowMessageAsync("오류", "지역을 선택하세요");
                 return;
             }
             // 아니면 try ~ catch
@@ -158,6 +175,7 @@ namespace WpfCctvMonitorApp
             catch (Exception ex)
             {
                 // 대부분 OpenAPI 호출 이후 네트워크문제에서 발생
+                await ShowMessageAsync("검색 오류", $"CCTV 검색 중 오류가 발생했습니다. {ex.Message}");
                 System.Windows.MessageBox.Show($"CCTV 검색 중 오류가 발생했습니다. {ex.Message}", "검색 오류",
                                 System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -247,7 +265,7 @@ namespace WpfCctvMonitorApp
         }
 
         
-        private static bool InitApiKey()
+        private bool InitApiKey()
         {
             AppCommon.ItsApiKey = ConfigurationManager.AppSettings["ItsApiKey"];
 
@@ -426,7 +444,42 @@ namespace WpfCctvMonitorApp
         }       
 
         
+        // MessageBox.Show 대신 사용할 기능
+        private async Task ShowMessageAsync(string title, string message)
+        {
+            //var dialog = new ContentDialog
+            //{
+            //    Title = title,
+            //    Content = message,
+            //    CloseButtonText = "확인",
+            //};
 
+            //await dialog.ShowAsync();
+
+            var uiMessagebox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title= title,
+                Content = message
+            };
+
+            _ = await uiMessagebox.ShowDialogAsync();
+        }
         
+        // 예/아니오 선택 MessageBox.Show 대신 사용할 메서드
+        private async Task<bool> ShowConfirmAsync(string title, string message)
+        {
+            var uiMessagebox = new Wpf.Ui.Controls.MessageBox
+            {
+                Title = title,
+                Content= message,
+
+                PrimaryButtonText = "예",
+                SecondaryButtonText = "아니오"
+            };
+
+            var result = await uiMessagebox.ShowDialogAsync();
+
+            return result == Wpf.Ui.Controls.MessageBoxResult.Primary;
+        }
     }
 }
