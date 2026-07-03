@@ -10,7 +10,7 @@ namespace ProductApi
             // Add services to the container.
             var connString = builder.Configuration.GetConnectionString("TestDbConnection");
 
-            Console.WriteLine(connString);
+            //Console.WriteLine(connString);
 
             // builder.Services.AddDbContext<>  EntityFramework를 안쓰기때문에 사용불가
 

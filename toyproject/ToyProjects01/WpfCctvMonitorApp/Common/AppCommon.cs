@@ -1,38 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace WpfCctvMonitorApp.Common
 {
-    class AppCommon
+    public static class AppCommon
     {
-        public const string ApiUrl = "https://openapi.its.go.kr:9443/cctvInfo";
+        public const string baseUrl = "https://openapi.its.go.kr:9443/cctvInfo";
 
-        public static string? ItsOpenApiKey { get; set; } = "OPENAPI_KEY";
-
-        public static string ApiType = "ex";
-        public static string GetType { get; set; } = "json";
-        public static string StreamType { get; set; } = "1"; // 1: hls 2:mp4 3: 정지영상
-
-        public static double MinY { get; set; } = 33.0;
-        public static double MaxY { get; set; } = 39.0;
-        public static double MinX { get; set; } = 124.0;
-        public static double MaxX { get; set; } = 129.0;
-
-        public static string BuildGetQueryString(string type)
-        {
-            return "";
+        // 승인받은 API키 입력. user-secrets, setx 외부공개안하거나, App.config 환경변수로 분리 저장
+        public static string? ItsApiKey { get; set; } = "OPENAPI_KEY";
+        public static string RoadType = "ex";  // ex:고속도로 its:국도  `Type은 클래스 Keyword`
+        public static string GetType { get; set; } = "json";  // xml은 안해
+        public static string CctvType { get; set; } = "1";  // 1: HLS, 2:MP4, 3:정지영상. 4:HLS(https), 5:mp4(https) 2~5 필요없음
 
 
+        // 대한민국 지도 영역
+        // 위도 y
+        public static double MinY { get; set; } = 33.100000;
+        public static double MaxY { get; set; } = 39.000000;
+        // 경도 x
+        public static double MinX { get; set; } = 126.000000;
+        public static double MaxX { get; set; } = 129.660000;
+
+        public static string BuildCctvApiUrl()
+        {            
+            return $"{baseUrl}" + 
+                   $"?apiKey={ItsApiKey}" + 
+                   $"&type={RoadType}" + 
+                   $"&cctvType={CctvType}" + 
+                   $"&minX={MinX}" + 
+                   $"&maxX={MaxX}" + 
+                   $"&minY={MinY}" + 
+                   $"&maxY={MaxY}" + 
+                   $"&getType={GetType}";
         }
 
-        public 
+        public static readonly string[] Regions =
+        {
+            "-- 선택 --", // 인덱스 0은 사용안함
+            "전국",
+            "서울",
+            "인천",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "세종",
+            "대전",
+            "전북",
+            "전남",
+            "광주",
+            "경북",
+            "대구",
+            "울산",
+            "부산",
+            "경남",
+            "제주"
+        };
 
         public static readonly Dictionary<string, GeoBound> RegionBounds = new()
         {
             ["전국"] = new GeoBound(33.1, 39.0, 126.0, 129.7),
-            ["서울"] = new GeoBound(minLat: 37.4133, maxLat: 37.7100, minLng:126.7757, maxLng:127.1600),
+            ["서울"] = new GeoBound(minLat: 37.4133, maxLat: 37.7100, minLng: 126.7757, maxLng: 127.1600),
             ["인천"] = new GeoBound(37.0000, 37.9500, 124.6000, 126.8500),
             ["경기"] = new GeoBound(36.8900, 38.3000, 126.3700, 127.8500),
             ["강원"] = new GeoBound(37.0200, 38.6200, 127.0500, 129.3700),
@@ -55,5 +85,20 @@ namespace WpfCctvMonitorApp.Common
             ["제주"] = new GeoBound(33.1000, 33.6000, 126.1000, 126.9500),
         };
 
+        // 글자 길이가 너무길면 생략하는 메서드
+        public static string Ellipsis(string text, int maxLength = 100)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return string.Empty; // ""
+            }
+
+            if (text.Length <= maxLength)
+            {
+                return text;
+            }
+
+            return text[..maxLength] + "...";
+        }
     }
 }

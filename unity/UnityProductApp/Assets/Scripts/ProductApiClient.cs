@@ -1,17 +1,28 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class ProductApiClient : MonoBehaviour
 {
+    //[SerializeField]
+    //private TMP_Text txtLog;
+
     [SerializeField]
-    private TMP_Text txtLog;
+    //private string serviceUrl = "http://localhost:5276/api/products"; // 개발용 API 주소
+    private string serviceUrl = "http://192.168.0.2:8080/api/products"; // 도커 API 주소
 
-    private string serviceUrl = "http://localhost:5276/api/products";
+    [SerializeField]
+    private Transform content;
 
-    public void  LoadProducts()
+    [SerializeField]
+    private ProductRowUi productRowPrefab;
+
+
+    public void LoadProducts()
     {
         StartCoroutine(GetProducts());
     }
@@ -24,10 +35,32 @@ public class ProductApiClient : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            txtLog.text = request.error;
+            //txtLog.text = request.error;
+            Debug.LogError(request.error);
             yield break;
         }
 
-        txtLog.text = request.downloadHandler.text;
+        //txtLog.text = request.downloadHandler.text;
+        string json = request.downloadHandler.text;
+
+        List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
+
+        ClearRows();
+
+        foreach (Product product in products)
+        {
+            Debug.Log($"{product.productId}/{product.productName}...");
+
+            ProductRowUi row = Instantiate(productRowPrefab, content); // content 아래 프리팹 생성
+            row.SetData(product); // 내용채우기
+        }        
+    }
+
+    private void ClearRows()
+    {
+        foreach (Transform child in content) 
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

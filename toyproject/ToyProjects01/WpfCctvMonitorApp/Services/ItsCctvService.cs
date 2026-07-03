@@ -10,16 +10,19 @@ namespace WpfCctvMonitorApp.Services
 {
     public class ItsCctvService
     {
-        private readonly HttpClient httpClient = new();
+        private readonly HttpClient httpClient = new ();
 
         // TODO
-        public async Task<ObservableCollection<CctvInfo>> GetCctvListAsync() {
+        public async Task<CctvResponse> GetCctvListAsync(string apiUrl) {
 
             string json = await httpClient.GetStringAsync(apiUrl);
 
-            var result = JsonConvert.DeserializeObject<ObservableCollection<CctvInfo>>(json);
+            var result = JsonConvert.DeserializeObject<CctvResponse> (json);
 
-            return result;
+            if (result == null)
+                return new CctvResponse();
+            else 
+                return result;
         }
 
         public async Task<ObservableCollection<CctvInfo>> GetAllCctvListAsync()

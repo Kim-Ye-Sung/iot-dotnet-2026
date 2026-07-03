@@ -121,7 +121,8 @@
                       RowHeaderWidth="0"
                       SelectionMode="Single"
                       SelectionUnit="FullRow"
-                      IsReadOnly="True">
+                      IsReadOnly="True"
+                      MouseDoubleClick="DgrProduct_MouseDoubleClick">
 
                 <DataGrid.Columns>
 

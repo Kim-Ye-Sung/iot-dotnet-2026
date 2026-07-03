@@ -13,5 +13,6 @@
         public string CoordY { get; set; }
         public string CctvFormat { get; set; }
         public string CctvName { get; set; }
+        
     }
 }

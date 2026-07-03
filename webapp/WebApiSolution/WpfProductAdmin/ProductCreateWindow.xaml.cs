@@ -1,16 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WpfProductAdmin.Models;
 using WpfProductAdmin.Services;
 
@@ -35,8 +25,26 @@ namespace WpfProductAdmin
             // Validation Check
             if (string.IsNullOrEmpty(TxtProductName.Text.Trim()))
             {
-                MessageBox.Show("상품명을 입력하세요.");
-                TxtProductName.Focus(); // 상품명 입력창에 포커스
+                await this.ShowMessageAsync("입력오류", "상품명을 입력하세요.");
+                // TxtProductName.Focus(); // 상품명 입력창에 포커스
+                return;
+            }
+
+            if (string.IsNullOrEmpty(TxtCategory.Text.Trim()))
+            {
+                await this.ShowMessageAsync("입력오류", "카테고리를 입력하세요.");
+                return;
+            }
+
+            if (!Decimal.TryParse(NudPrice.Value.ToString(), out decimal price))
+            {
+                await this.ShowMessageAsync("입력오류", "가격은 숫자로 입력하세요.");
+                return;
+            }
+
+            if (Convert.ToDecimal(NudPrice.Value) <= 0)
+            {
+                await this.ShowMessageAsync("입력오류", "가격은 1000원 이상 입력하세요.");
                 return;
             }
 
@@ -45,6 +53,7 @@ namespace WpfProductAdmin
                 await this.ShowMessageAsync("입력오류", "재고는 숫자로 입력하세요.");
                 return;
             }
+
 
             Product product = new Product
             {
@@ -58,13 +67,13 @@ namespace WpfProductAdmin
 
             if (result)
             {
-                MessageBox.Show("상품이 등록되었습니다.");
+                await this.ShowMessageAsync("저장", "상품이 등록되었습니다.");
                 DialogResult = true;
                 Close();
             }
             else
             {
-                MessageBox.Show("상품 등록이 실패했습니다.");
+                await this.ShowMessageAsync("저장", "상품 등록이 실패했습니다.");
             }
         }
 

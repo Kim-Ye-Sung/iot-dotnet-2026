@@ -147,7 +147,7 @@ namespace WpfSmartHomeSubscribeApp
             // DB 설정
             db = new DatabaseHelper();
             db.connStr = $"Server={DbHost};" +
-                          "Port=3316;" +
+                          "Port=3306;" +
                          $"Database={DbName};" +
                          $"User ID={DbUser};" +
                          $"Password={DbPassword};" +
