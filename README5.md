@@ -10,7 +10,9 @@
 
 ### WPF MVVM 활용
 
-- MVVM 패턴 학습 + 앱개발
+- [MVVM 패턴 학습 + 앱개발](./TOYPROJECT2.md)
+
+### 깃허브 대문 작성
 
 ### Unity ProductApp 기능 개선
 
