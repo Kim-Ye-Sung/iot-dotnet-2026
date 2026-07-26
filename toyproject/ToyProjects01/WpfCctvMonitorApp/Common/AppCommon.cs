@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Wpf.Ui.Controls;
 
 namespace WpfCctvMonitorApp.Common
 {
     public static class AppCommon
     {
-        public const string appName = "국가교통정보센터 CCTV 정보앱";
-        public const string baseUrl = "https://openapi.its.go.kr:9443/cctvInfo";
+        public const string appName = "국가교통정보센터 CCTV 정보앱 v1.3";
+
+        //public const string baseUrl = "https://openapi.its.go.kr:9443/cctvInfo";
+        public const string baseUrl = "http://localhost:5146/api/itscctv";
 
         // 승인받은 API키 입력. user-secrets, setx 외부공개안하거나, App.config 환경변수로 분리 저장
-        public static string? ItsApiKey { get; set; } = "OPENAPI_KEY";
+        //public static string? ItsApiKey { get; set; } = "OPENAPI_KEY";
         public static string RoadType = "ex";  // ex:고속도로 its:국도  `Type은 클래스 Keyword`
         public static string GetType { get; set; } = "json";  // xml은 안해
         public static string CctvType { get; set; } = "1";  // 1: HLS, 2:MP4, 3:정지영상. 4:HLS(https), 5:mp4(https) 2~5 필요없음
@@ -20,24 +21,24 @@ namespace WpfCctvMonitorApp.Common
 
         // 대한민국 지도 영역
         // 위도 y
-        public static double MinY { get; set; } = 33.100000;
-        public static double MaxY { get; set; } = 39.000000;
-        // 경도 x
-        public static double MinX { get; set; } = 126.000000;
-        public static double MaxX { get; set; } = 129.660000;
+        //public static double MinY { get; set; } = 33.100000;
+        //public static double MaxY { get; set; } = 39.000000;
+        //// 경도 x
+        //public static double MinX { get; set; } = 126.000000;
+        //public static double MaxX { get; set; } = 129.660000;
 
-        public static string BuildCctvApiUrl()
-        {            
-            return $"{baseUrl}" + 
-                   $"?apiKey={ItsApiKey}" + 
-                   $"&type={RoadType}" + 
-                   $"&cctvType={CctvType}" + 
-                   $"&minX={MinX}" + 
-                   $"&maxX={MaxX}" + 
-                   $"&minY={MinY}" + 
-                   $"&maxY={MaxY}" + 
-                   $"&getType={GetType}";
-        }
+        //public static string BuildCctvApiUrl()
+        //{            
+        //    return $"{baseUrl}" + 
+        //           $"?apiKey={ItsApiKey}" + 
+        //           $"&type={RoadType}" + 
+        //           $"&cctvType={CctvType}" + 
+        //           $"&minX={MinX}" + 
+        //           $"&maxX={MaxX}" + 
+        //           $"&minY={MinY}" + 
+        //           $"&maxY={MaxY}" + 
+        //           $"&getType={GetType}";
+        //}
 
         public static readonly string[] Regions =
         {
@@ -105,9 +106,10 @@ namespace WpfCctvMonitorApp.Common
         }
 
         // CctvName 잘라서 분리메서드
-        public (string cctvName, string roadName, string direction) ParseName(strin originCctvName)
+        // string.Substring()으로 가능한 작업 -> 정규식은 간결하게 패턴타입 처리가능
+        public static (string cctvName, string roadName, string direction) ParseName(string originCctvName)
         {
-            if(string.IsNullOrWhiteSpace(originCctvName))
+            if (string.IsNullOrWhiteSpace(originCctvName))
             {
                 return ("", "", "");
             }
@@ -115,16 +117,18 @@ namespace WpfCctvMonitorApp.Common
             // "[수도권제1순환선] 성남요금소 (서울)" 문자열을 정규식패턴으로 자르기
             Match match = Regex.Match(
                 originCctvName,
-                @"^\[(.*?)\]\s*(.*?)()");
+                @"^\[(.*?)\]\s*(.*?)(?:\((.*?)\))?$");
 
-            if(!match.Success)
+            if (!match.Success)
             {
-                return (originCctvName, "", "");  // 패턴매칭 실패
+                return (originCctvName, "", ""); // 패턴매칭 실패
             }
 
             var roadName = match.Groups[1].Value.Trim();
             var cctvName = match.Groups[2].Value.Trim();
-            
+            var direction = match.Groups[3].Value.Trim();
+
+            return (cctvName, roadName, direction);  // Python tuple과 동일
         }
     }
 }

@@ -3,24 +3,24 @@ int motorDirectionPin = 12;
 int value;
 
 void setup() {  
-  pinMode(motorDirectionPin, OUTPUT);
+  Serial.begin(9600);
   noTone(4);
+  pinMode(motorDirectionPin, OUTPUT);
+  digitalWrite(motorDirectionPin, HIGH);
+  value = 80;
+  analogWrite(motorSpeedPin, value);
 }
 
 void loop() {
-  // 정방향
-  digitalWrite(motorDirectionPin, HIGH);
-  for (value = 0; value <= 255; value += 5) {
-    analogWrite(motorSpeedPin, value);
-    delay(30);
-  }
-  delay(1000);
+  if (Serial.available()) {
+    value = Serial.parseInt();
+    if (value >= 255) {
+      value = 255;
+    } else if (value <= 0) {
+      value = 0;
+    }
 
-  // 역방향
-  digitalWrite(motorDirectionPin, LOW);
-  for (value = 0; value <= 255; value += 5) {
+    Serial.println(value);
     analogWrite(motorSpeedPin, value);
-    delay(30);
-  }
-  delay(1000);
+  }  
 }

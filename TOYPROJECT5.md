@@ -1,4 +1,4 @@
-# 토이 프로젝트5
+# 토이 프로젝트 5
 
 ## 컨베이어벨트 사용 공정관리 시스템
 
@@ -17,23 +17,23 @@
 |MES(생산계획관리)|생산 현장 관리|생산관리자|
 |PLC(생산로직제어)|기계 제어|설비|
 |SCADA|설비모니터링|생산현장|
-|HMI(사람-기계 인터페이스)|작업자 화면(터치패널)|작업자|
-|WMS(창고관리)|창고 관리,재고관리|물류|
+|HMI(사람-기게 인터페이스)|작업자 화면(터치패널)|작업자|
+|WMS(창고관리)|창고관리,재고관리|물류|
 |QMS(품질관리)|품질관리,품질계획관리|품질팀|
 |CMMS(유지보수관리)|설비 유지보수|설비팀|
 
-![alt text](image-264.png)
+![alt text](image-319.png)
 
 - 공정관리
     - MES의 한 파트인 공정(MRP:자재 소요 계획)을 실시간으로 모니터링, 제어
-    - 스마트팩토리로 실시간으로 양룸 불량을 선별 데이터 생성
+    - 스마트팩토리로 실시간으로 양품,불량을 선별 데이터 생성
     - Vision, IoT센서(적외선, X-ray, 스캐너...)
 
 - IIoT - Industrial IoT. 대규모, 높은 정밀도, 고가...
 
 ### 전체 시스템 구조
 
-![alt text](image-265.png)
+![alt text](image-320.png)
 
 ### 아두이노 컨베이어벨트
 
@@ -45,7 +45,7 @@
 - 모터 드라이버 : 서보, DC등 모터를 쉽게 제어할 수 있도록 모듈화
 - 모터 제어시 9V까지 전원 추가 - 아두이노 전원 불필요
 
-![alt text](image-267.png)
+![alt text](image-322.png)
 
 - A - 디지털핀 13개
 - B - 아날로그 확장 5개
@@ -59,7 +59,11 @@
 
 #### 테스트
 
-- Arduino 
+![alt text](image-323.png)
+
+- Arduino IDE로 진행
+
+![alt text](image-324.png)
 
 - 부저 테스트
 
@@ -82,6 +86,8 @@ void loop() {
 - 기어드 DC 모터 컨베이어 테스트
     - L298P 쉴드에 최소 9V 전원(최대 24V)인가
     - 2A 넘기지 말 것
+
+![alt text](image-329.png)
 
 ```cpp
 int motorSpeedPin = 10;
@@ -113,18 +119,176 @@ void loop() {
 ```
 
 - 기어드 DC 모터 제어 - [소스](./toyproject/ToyProjects05/arduino_part/sample01/sample01.ino)
-    - 모터 스피드 0 ~ 255 사이에서 제어, 실제 50이하는 동작안함
+    - 모터 스피드 값 0 ~ 255 사이에서 제어, 실제 50이하는 동작안함
     - Default 80
     - 10부터 시작하면 60에서도 동작안함. 255에서 부터 줄여가면 50에서도 동작
 
 - Serial Monitor 사용 주의점
     - 시리얼 입력에서 New Line, Carriage Return 선택, 입력하면 값 이외에 다른 데이터 전달됨
 
-![alt text](image-268.png)
+![alt text](image-325.png)
+    
+![alt text](image-326.png)
 
-![alt text](image-269.png)
 
-![alt text](image-270.png)
+- 적외선 IR 송수신 센서
+
+![alt text](image-330.png)
+
+```cpp
+// 적외선 IR 센서
+int sensor = A0;
+int val;
+
+void setup() {
+  Serial.begin(19200);
+  pinMode(sensor, INPUT);
+  Serial.println("Arduino start!");
+}
+
+void loop() {
+  val = digitalRead(sensor);
+  if (val == LOW) {
+    Serial.println("Detected");
+    delay(300);
+  } else {
+    Serial.println("0");
+    delay(300);
+  }
+}
+```
+
+![alt text](image-328.png)
+
+- 서보모터 SG-90 
+    - 확장핀 3 연결, 시그널 D9 전달
+    - 각초 초기화 한 다음에 바를 연결
+
+![alt text](image-331.png)
+
+```cpp
+// 서보모터
+#include <Servo.h>
+#define SERVO_PIN 9  // Digital 9
+Servo servo;
+
+void setup() {
+  Serial.begin(19200);
+  servo.attach(SERVO_PIN);  // 서보모터 연결
+  servo.write(0);  // 0도로 초기화(!)
+  delay(500);
+}
+
+void loop() {
+  if (Serial.available()) {
+    int value = Serial.parseInt();
+    servo.write(value);
+    Serial.println(value);
+    delay(100);
+  }
+}
+```
+
+동영상 나중에
+
+- RGB LED 네오픽셀
+    - Adafruit NeoPixel 라이브러리 설치    
+
+![alt text](image-332.png)
+
+```cpp
+// NeoPixel LED 
+#include <Adafruit_NeoPixel.h>
+#define PIN 5
+#define NUMPIXELS 3
+
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  pixels.begin();
+  pixels.setBrightness(50);
+}
+
+void loop() {
+  for (int i=0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+    pixels.show();
+  }
+  delay(1000);
+  for (int i=0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+    pixels.show();
+    delay(10);
+  }
+  delay(1000);
+  for (int i=0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0, 0, 255));
+    pixels.show();
+    delay(10);
+  }
+  delay(1000);
+}
+```
+
+- 1초당 RGB 색상 변경 확인
+
+- 컬러센서(TCS34725) 모듈
+    - RGB 색상 감지
+    - Adafruit TCS34725 라이브러리 설치
+
+![alt text](image-333.png)
+
+```cpp
+// Color Sensor
+#include <Wire.h>
+#include <Adafruit_TCS34725.h>
+
+Adafruit_TCS34725 TCS = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+
+void setup() {
+  Serial.begin(19200);
+  TCS.begin();  
+}
+
+void loop() {
+  uint16_t clear, red, green, blue;
+  delay(100);
+  TCS.getRawData(&red, &green, &blue, &clear);
+
+  int r = map(red, 0, 21504, 0, 2000);
+  int g = map(green, 0, 21504, 0, 2000);
+  int b = map(blue, 0, 21504, 0, 2000);
+
+  Serial.print("    R: ");
+  Serial.print(r);
+  Serial.print("    G: ");
+  Serial.print(g);
+  Serial.print("    B: ");
+  Serial.println(b);
+}
+```
+![alt text](image-334.png)
+
+- 색상 테스트
+    - 초기상태 : RGB(4,3,3)
+    - 파란색 물체 : RGB(8, 11, 15)
+    - 녹색 물체 : RGB(14, 18, 10)    
+    - 빨간색 물체 : RGB(21, 6, 6)
+
+
+#### 컨베이어벨트 조립
+
+- 조립중간 단계
+
+![alt text](image-335.png)
+
+- 완성 단계
+
+![alt text](image-327.png)
+
+#### 통합로직 구현
+
+
 
 ### MQTT 통신 시스템
 

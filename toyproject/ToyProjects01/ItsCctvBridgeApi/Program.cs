@@ -1,4 +1,8 @@
 
+using ItsCctvBridgeApi.Services;
+using System.Security.AccessControl;
+using WpfCctvMonitorApp.Common;
+
 namespace ItsCctvBridgeApi
 {
     public class Program
@@ -8,10 +12,25 @@ namespace ItsCctvBridgeApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            // 
+            builder.Services.AddHttpClient<ItsCctvService>(client =>
+            {
+                client.BaseAddress = new Uri(AppCommon.baseUrl);
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             //builder.Services.AddOpenApi();
+
+            // CORS 설정 - 외부서버 접근허용
+            builder.Services.AddCors(options => {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             var app = builder.Build();
 
@@ -21,10 +40,9 @@ namespace ItsCctvBridgeApi
                 //app.MapOpenApi();
             }
 
-            app.UseAuthorization();
-
-
+            app.UseAuthorization();                       
             app.MapControllers();
+            app.UseCors("AllowAll"); // CORS 사용
 
             app.Run();
         }
