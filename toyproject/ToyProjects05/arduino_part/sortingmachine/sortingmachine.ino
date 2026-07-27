@@ -29,7 +29,7 @@
 #define PIN_LED             5       // LED 핀
 #define PIN_IR              A0      // 적외선 IR센서 핀
 
-#define DGR_RED             35      // 빨간색 서보모터 각도
+#define DGR_RED             40      // 빨간색 서보모터 각도
 #define DGR_GREEN           57      // 초록색 서보모터 각도
 #define DGR_BLUE            2       // 파란색 서보모터 각도
 #define NUM_PIXELS          3       // 네오픽셀 수, RGB
@@ -41,7 +41,8 @@ Adafruit_NeoPixel pixels(NUM_PIXELS, PIN_LED, NEO_GRB + NEO_KHZ800);
 
 uint16_t clear, red, green, blue;   // 색상 값을 저장할 unsigned short int형 변수
 int r, g, b, sum;                   // 색상 값을 사용하기 위한 변환값
-int railSpeed = 80;                // 레일 기본 속도, 초기값은 160
+int railSpeed = 70;                 // 레일 기본 속도, 초기값은 160
+char color = 'N';                   // 확인 색상 (기본 N)
 
 // 초기화
 void setup() {
@@ -69,14 +70,63 @@ void setup() {
 
 // 반복작업
 void loop() {
+  analogWrite(PIN_DC_SPEED, 0); // 나중에 주석 처리
+  
   // 제품 적재여부 확인
   if (digitalRead(PIN_IR) == HIGH) return; // IR센서는 물체감지 시 LOW 전달
 
   // toneDetected();                     // 물체감지 사운드    
   analogWrite(PIN_DC_SPEED, railSpeed - 20); 
   // 일정 시간 후 멈추기
-  delay(1000);                        // 2초 딜레이
-  analogWrite(PIN_DC_SPEED, 0);       // 레일 정지
+  delay(600);                         // 500ms 딜레이
+  analogWrite(PIN_DC_SPEED, 0);       // 컬러센서에서 레일 정지
+
+  // 컬러센서로 색상판별
+  do {
+    TCS.getRawData(&red, &green, &blue, &clear);      // 색상센서 동작
+    r = map(red, 0, 21504, 0, 1000);
+    g = map(green, 0, 21504, 0, 1000);
+    b = map(blue, 0, 21504, 0, 1000);
+    sum = r + g + b;
+  } while (sum < 15);
+
+  toneDetected();
+  delay(1000);    // 1초 딜레이
+  color = getColor(r, g, b);
+  Serial.println(color);  
+
+  // 색상별로 서보모터 각도 조절
+  if (color == 'R') {
+    servo.attach(PIN_SERVO);
+    servo.write(DGR_RED);       // 빨간색 분류 각도
+
+    // LED모듈 빨간색
+    pixels.setPixelColor(0, pixels.Color(255, 0, 0));
+    pixels.setPixelColor(1, pixels.Color(255, 0, 0));
+    pixels.setPixelColor(2, pixels.Color(255, 0, 0));
+  } else if (color == 'G') {
+    servo.attach(PIN_SERVO);
+    servo.write(DGR_GREEN);       // 녹색 분류 각도
+
+    // LED모듈 녹색으로
+    pixels.setPixelColor(0, pixels.Color(0, 255, 0));
+    pixels.setPixelColor(1, pixels.Color(0, 255, 0));
+    pixels.setPixelColor(2, pixels.Color(0, 255, 0));
+  } else if (color == 'B') {
+    servo.attach(PIN_SERVO);
+    servo.write(DGR_BLUE);       // 파란색 분류 각도
+
+    // LED모듈 파란색으로
+    pixels.setPixelColor(0, pixels.Color(0, 0, 255));
+    pixels.setPixelColor(1, pixels.Color(0, 0, 255));
+    pixels.setPixelColor(2, pixels.Color(0, 0, 255));
+  }
+  pixels.show();   // 입력한 색상 출력
+  delay(500);
+  servo.detach();     // 서보모터 연결해제
+
+  analogWrite(PIN_DC_SPEED, railSpeed);
+  delay(1000);
 }
 
 // 적외선 센서, 색상감지 등 물체 감지시 소리출력
@@ -85,4 +135,16 @@ void toneDetected() {
   delay(100);
   tone(4, 784, 50);                     // 미, 0.05초간 출력
   delay(100);
+}
+
+char getColor(int r, int g, int b) {
+  if (r < 5 && g < 5 && b < 5) {
+    return 'N';
+  } else if (r > g && r > b) {
+    return 'R';
+  } else if (g > r && g > b) {
+    return 'G';
+  } else if (b > r && b > g) { 
+    return 'B';
+  }
 }

@@ -288,9 +288,28 @@ void loop() {
 
 #### 통합로직 구현
 
+- [전체소스](./toyproject/ToyProjects05/arduino_part/sortingmachine/sortingmachine.ino)
 
+#### Arduino 교체테스트
+
+- [Arduino Uno R3]() 에서 
+
+
+#### IR 적외선 센서팁
+
+- 레일에 파란색, 검은색 전기테이프도 인식됨
+
+#### 기본 동작
+
+- 동영상 추후 업로드
+
+### 라즈베리파이 연결
+
+- 아두이노 + 라즈베리파이 5
 
 ### MQTT 통신 시스템
+
+- Raspbian -> Windows MQTT 통신
 
 ### Unity 디지털트윈 시스템
 
